@@ -6,46 +6,64 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 21:32:05 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/14 16:54:31 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/20 17:39:27 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rra(t_element *a)
+t_element	*rra(t_element *a)
 {
+	t_element	*final_element;
+	t_element	*top_stack;
+	int	e_position;
+
+	final_element = a;
+	top_stack = a;
+	e_position = a->position + 1;
 	if (a != NULL && a->next != NULL)
 	{
-		t_element	*tmp;
-
-		tmp = malloc(sizeof(*tmp));
-		if (tmp == NULL)
-			return ;
-		tmp = *a;
 		while (a->next != NULL)
 			a = a->next;
-		a->next = *tmp;
-		a = NULL;
-		free(tmp);
+		final_element = a;
+		a->next = top_stack;
+		a->position = e_position;
+		top_stack = a;
+		while (a->next != final_element)
+		{
+			a->position--;
+			a = a->next;
+		}
+		a->position--;
+		a->next = NULL;
 	}
+	return (top_stack);
 }
 
-void	rrb(t_element *b)
+t_element	*rrb(t_element *b)
 {
+	t_element	*final_element;
+	t_element	*top_stack;
+	int	e_position;
+
+
+	final_element = b;
+	top_stack = b;
+	e_position = b->position + 1;
 	if (b != NULL && b->next != NULL)
 	{
-		t_element	*tmp;
-
-		tmp = malloc(sizeof(*tmp));
-		if (tmp == NULL)
-			return ;
-		tmp = *b;
 		while (b->next != NULL)
 			b = b->next;
-		b->next = *tmp;
-		b = NULL;
-		free(tmp);
+		final_element = b;
+		b->next = top_stack;
+		b->position = e_position;
+		top_stack = b;
+		while (b->next != final_element)
+			b = b->next;
+		b->position--;
+		b->next = NULL;
 	}
+	return (top_stack);
 }
 
 void	rrr(t_element *a, t_element *b)

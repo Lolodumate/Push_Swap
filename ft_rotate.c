@@ -6,48 +6,56 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:43:01 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/14 16:55:01 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/20 16:52:55 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ra(t_element *a)
+t_element	*ra(t_element *a)
 {
-	if (a != NULL && a->next != NULL)
-	{
-		t_element	*tmp;
+	t_element	*new_top;
+	t_element	*old_top;
 
-		tmp = malloc(sizeof(*tmp));
-		if (tmp == NULL)
-			return ;
-		tmp = *a;
-		tmp->next = NULL;
-		a = a->next;
+	new_top = a->next;
+	old_top = a;
+	if (a != NULL)
+	{
 		while (a->next != NULL)
+		{
+			a->position++;
 			a = a->next;
-		a->next = *tmp;
-		free(tmp);
+		}
+		a->position++;
+		a->next = old_top;
+		a = a->next;
+		a->position = 1;
+		a->next = NULL;
 	}
+	return (new_top);
 }
 
-void	rb(t_element *b)
+t_element	*rb(t_element *b)
 {
-	if (b != NULL && b->next != NULL)
-	{
-		t_element	*tmp;
+	t_element	*new_top;
+	t_element	*old_top;
 
-		tmp = malloc(sizeof(*tmp));
-		if (tmp == NULL)
-			return ;
-		tmp = *b;
-		tmp->next = NULL;
-		b = b->next;
+	new_top = b->next;
+	old_top = b;
+	if (b != NULL)
+	{
 		while (b->next != NULL)
+		{
+			b->position++;
 			b = b->next;
-		b->next = *tmp;
-		free(tmp);
+		}
+		b->position++;
+		b->next = old_top;
+		b = b->next;
+		b->position = 1;
+		b->next = NULL;
 	}
+	return (new_top);
 }
 
 void	rr(t_element *a, t_element *b)

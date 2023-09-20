@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:29:24 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/15 20:06:06 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/20 20:12:11 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,46 +76,6 @@ t_element	*ft_convert_argv(t_element *e, char *str)
 	return (e);
 }
 
-/*
-t_element	*ft_check_init_a(t_element *e)
-{
-	int		i;
-	int		count;
-	int		sign;
-
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		if (ft_isdigit(str[i]))
-		{
-			a = ft_add_element(a);	
-			sign = 1;
-			while (ft_isdigit(str[i]))
-			{
-				if (str[i] == '-' || str[i] == '+')
-				{
-					if (str[i] = '-')
-						sign = -1;
-					i++;
-				}
-				a->value += (str[i] - '0'); 
-				i++;
-				if (ft_isdigit(str[i]))
-					a->value *= 10;
-				else if (!str[i])
-				{
-					a->value *= sign;
-					a->position++;
-				}
-			}
-		}
-		i++;
-	}
-	return (a);
-}
-*/
-
 t_element	*push_swap(t_element *a)
 {
 	t_element	*tmp;
@@ -125,7 +85,7 @@ t_element	*push_swap(t_element *a)
 		return (NULL);
 	while (a)
 	{
-		printf("Valeur de tmp->value = %d\n", a->value);
+		printf("Position #%d - [%d]\n", a->position, a->value);
 		if (ft_check_duplicate(a->value, a) != NULL) // Fonction a priori OK. Faire tests complementaires.
 		{
 			ft_putstr("Error.\n");
@@ -134,16 +94,19 @@ t_element	*push_swap(t_element *a)
 		}
 		a = a->next;
 		// Ajouter une verification sur les limites d'entiers INT_MIN et INT_MAX.
+		// Ajouter une verification sur l'ordre des entiers. S'ils sont deja ordonnes, alors fin du programme.
 	}
 	return (tmp);
 }
 
 int	main(int argc, char **argv)
 {
-	t_element	*e;
+	t_element	*a;
+	t_element	*b;
 	t_element	*tmp;
 
-	e = NULL;
+	a = NULL;
+	b = NULL;
 	tmp = malloc(sizeof(*tmp));
 	if (tmp == NULL)
 		return (-1);
@@ -155,15 +118,49 @@ int	main(int argc, char **argv)
 		ft_putstr("Error : le nombre d'argument doit etre de 1.\n");
 		return (0);
 	}
-	e = ft_convert_argv(e, argv[1]);
-	tmp = e;
-	push_swap(e);
+	a = ft_convert_argv(a, argv[1]);
+	// Test des fonctions sa, sb et ss :
+	tmp = a;
+	printf("Avant fonction sa\n");
+	push_swap(a);
+	printf("\nApres fonction sa. Les deux premiers elements switchent.\n");
+	a = sa(a);
+	push_swap(a);
+	// Test des fonctions pa et pb :
+	tmp = a;
+	printf("\nAvant fonction ra\n");
+	push_swap(a);
+	printf("\nApres fonction ra. Le premier element passe en dernier.\n");
+	a = ra(a);
+	push_swap(a);
+	// Test des fonctions rra et rrb
+	tmp = a;
+	printf("\nAvant fonction rra\n");
+	push_swap(a);
+	printf("\nApres fonction rra - Le dernier element passe en premier.\n");
+	a = rra(a);
+	push_swap(a);
+	// Test des fonctions pa et pb
+	tmp = a;
+	printf("\nAvant fonction pb\n");
+	push_swap(a);
+	printf("\nApres fonction pb. Prend le premier element de a pour le mettre en haut de b.\n");
+	pb(a, b);
+	printf("push_swap(a) :\n");
+	push_swap(a);
+	printf("*****\n");
+	printf("push_swap(b) :\n");
+	push_swap(b);
+
+	ft_free_top_stack(b);
+	
+	tmp = a;
 	while (tmp != NULL)
 	{
-		printf("Position = %d - Value = %d\n", tmp->position, tmp->value);
+//		printf("Position = %d - Value = %d\n", tmp->position, tmp->value);
 		tmp = ft_free_top_stack(tmp);
 		if (tmp == NULL)
-			printf("Fin de la pile.\n");
+			printf("\nLa pile a ete nettoyee.\n");
 	}
 	if (tmp == NULL)
 		printf("La pile est vide.\n");
