@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:30:04 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/20 19:44:49 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/22 14:55:16 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 typedef struct	s_element
 {
@@ -30,6 +31,7 @@ int			ft_isdigit(char c);
 int			ft_atoi(char *str);
 int			ft_strchr(char *str, char c);
 int			ft_convert_int(char *str, int i);
+void		ft_print_stack(t_element *e);
 void		ft_putstr(char *str);
 void		ft_swap(int *a, int *b);
 void		ft_update_position(t_element *a, t_element *b);
@@ -37,8 +39,8 @@ void		rr(t_element *a, t_element *b);
 void		rrr(t_element *a, t_element *b);
 void		ss(t_element *a, t_element *b);
 
-void		pa(t_element *a, t_element *b);
-void		pb(t_element *a, t_element *b);
+t_element	*pa(t_element *a, t_element *b);
+t_element	*pb(t_element *a, t_element *b);
 
 t_element	*ra(t_element *a);
 t_element	*rb(t_element *b);

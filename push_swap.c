@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:29:24 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/20 20:12:11 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/22 15:58:55 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,9 @@ int	main(int argc, char **argv)
 {
 	t_element	*a;
 	t_element	*b;
-	t_element	*tmp;
 
 	a = NULL;
 	b = NULL;
-	tmp = malloc(sizeof(*tmp));
-	if (tmp == NULL)
-		return (-1);
 	if (argc == 2)
 		if (!ft_argv_compliant(argv[1])) // Fonction a corriger : retour incorrect sur les doubles signes --, ++, -+, etc...
 			return (-1);
@@ -120,49 +116,45 @@ int	main(int argc, char **argv)
 	}
 	a = ft_convert_argv(a, argv[1]);
 	// Test des fonctions sa, sb et ss :
-	tmp = a;
 	printf("Avant fonction sa\n");
-	push_swap(a);
+	ft_print_stack(a);
 	printf("\nApres fonction sa. Les deux premiers elements switchent.\n");
 	a = sa(a);
-	push_swap(a);
+	ft_print_stack(a);
 	// Test des fonctions pa et pb :
-	tmp = a;
 	printf("\nAvant fonction ra\n");
-	push_swap(a);
+	ft_print_stack(a);
 	printf("\nApres fonction ra. Le premier element passe en dernier.\n");
 	a = ra(a);
-	push_swap(a);
+	ft_print_stack(a);
 	// Test des fonctions rra et rrb
-	tmp = a;
 	printf("\nAvant fonction rra\n");
-	push_swap(a);
+	ft_print_stack(a);
 	printf("\nApres fonction rra - Le dernier element passe en premier.\n");
 	a = rra(a);
-	push_swap(a);
+	ft_print_stack(a);
 	// Test des fonctions pa et pb
-	tmp = a;
 	printf("\nAvant fonction pb\n");
-	push_swap(a);
+	printf("Pile A :\n");
+	ft_print_stack(a);
+	printf("Pile B :\n");
+	ft_print_stack(b);
 	printf("\nApres fonction pb. Prend le premier element de a pour le mettre en haut de b.\n");
-	pb(a, b);
-	printf("push_swap(a) :\n");
-	push_swap(a);
-	printf("*****\n");
-	printf("push_swap(b) :\n");
-	push_swap(b);
-
-	ft_free_top_stack(b);
+	b = pb(a, b);
+	a = ft_free_top_stack(a);
+	printf("Pile A :\n");
+	ft_print_stack(a);
+	printf("Pile B :\n");
+	ft_print_stack(b);
+	printf("\nApres fonction pa. Prend le premier element de b pour le mettre en haut de a.\n");
+	a = pa(a, b);
+	b = ft_free_top_stack(b);
+	printf("Pile A :\n");
+	ft_print_stack(a);
+	printf("Pile B :\n");
+	ft_print_stack(b);
 	
-	tmp = a;
-	while (tmp != NULL)
-	{
-//		printf("Position = %d - Value = %d\n", tmp->position, tmp->value);
-		tmp = ft_free_top_stack(tmp);
-		if (tmp == NULL)
-			printf("\nLa pile a ete nettoyee.\n");
-	}
-	if (tmp == NULL)
-		printf("La pile est vide.\n");
+	a = ft_free_stack(a);
+	b = ft_free_stack(b);
 	return (0);
 }

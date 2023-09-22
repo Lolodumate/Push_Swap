@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:12:47 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/15 19:25:28 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/22 15:43:52 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,32 +33,11 @@ t_element	*ft_free_stack(t_element *e)
 
 	if (e == NULL)
 		return (NULL);
-/*	tmp = malloc(sizeof(*tmp));
-	if (tmp == NULL)
-	{
-		free(e);
-		return (NULL);
-	}
-*/	tmp = e->next;
+	tmp = e->next;
 	free(e);
+	if (tmp == NULL)
+		printf("La pile a ete nettoyee.\n");
 	return (ft_free_stack(tmp));
-}
-
-t_element	*ft_free_top_stack(t_element *e)
-{
-	t_element	*tmp;
-
-	if (e == NULL)
-		return (NULL);
-/*	tmp = malloc(sizeof(*tmp));
-	if (tmp == NULL)
-	{
-		free(e);
-		return (NULL);
-	}
-*/	tmp = e->next;
-	free(e);
-	return (tmp);
 }
 
 t_element	*ft_check_duplicate(int value, t_element *e)

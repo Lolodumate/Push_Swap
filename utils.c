@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:41:53 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/15 15:29:03 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/22 15:28:39 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,20 @@ int	ft_atoi(char *str)
 		i++;
 	}
 	return (res * sign);
+}
+
+void	ft_print_stack(t_element *e)
+{
+	if (e == NULL)
+	{
+		printf("La pile est vide\n");
+		return ;
+	}
+	while (e)
+	{
+		printf("#%d - [%d]\n", e->position, e->value);
+		e = e->next;
+		if (e == NULL)
+			printf("Fin de la pile.\n\n");
+	}
 }
