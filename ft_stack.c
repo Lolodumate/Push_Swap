@@ -6,19 +6,20 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:12:47 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/22 15:43:52 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/25 13:40:29 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_element	*ft_add_element(t_element *e, int e_value, int e_position)
+t_list	*ft_add_node(t_list *e, int e_value, int e_position)
 {
-	t_element	*tmp;
-
+	t_list	*tmp;
+	
 	tmp = malloc(sizeof(*tmp));
 	if (tmp == NULL)
 		return (NULL);
+	tmp->ptr_node = tmp;
 	tmp->value = e_value;
 	tmp->position = e_position;
 	tmp->index = 0;
@@ -27,9 +28,9 @@ t_element	*ft_add_element(t_element *e, int e_value, int e_position)
 	return (tmp);
 }
 
-t_element	*ft_free_stack(t_element *e)
+t_list	*ft_free_stack(t_list *e)
 {
-	t_element	*tmp;
+	t_list	*tmp;
 
 	if (e == NULL)
 		return (NULL);
@@ -40,9 +41,9 @@ t_element	*ft_free_stack(t_element *e)
 	return (ft_free_stack(tmp));
 }
 
-t_element	*ft_check_duplicate(int value, t_element *e)
+t_list	*ft_check_duplicate(int value, t_list *e)
 {
-	t_element	*tmp;
+	t_list	*tmp;
 
 	tmp = e->next;
 	if (tmp == NULL)

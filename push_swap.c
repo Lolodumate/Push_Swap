@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:29:24 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/22 15:58:55 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/25 19:55:36 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,15 @@ int	ft_argv_compliant(char *str)
 		i++;
 	}
 	if (str[i] == '\0')
+	{
+		ft_putstr("Le format de la liste est conforme.\n");
 		return (1);
+	}
 	ft_putstr("Error : le format de la liste n'est pas conforme.\n");
 	return (0);
 }
 
-t_element	*ft_convert_argv(t_element *e, char *str)
+t_list	*ft_convert_argv(t_list *e, char *str)
 {
 	int			i;
 	int			j;
@@ -69,23 +72,25 @@ t_element	*ft_convert_argv(t_element *e, char *str)
 		value[j] = '\0';
 		position++;
 		if (value[0] != '\0')
-			e = ft_add_element(e, ft_atoi(value), position);
+		{
+			e = ft_add_node(e, ft_atoi(value), position);
+			e->name_stack = 'A';
+		}
 		free(value);
 		i--;
 	}
 	return (e);
 }
 
-t_element	*push_swap(t_element *a)
+t_list	*push_swap(t_list *a)
 {
-	t_element	*tmp;
+	t_list	*tmp;
 
 	tmp = a;
 	if (a == NULL)
 		return (NULL);
 	while (a)
 	{
-		printf("Position #%d - [%d]\n", a->position, a->value);
 		if (ft_check_duplicate(a->value, a) != NULL) // Fonction a priori OK. Faire tests complementaires.
 		{
 			ft_putstr("Error.\n");
@@ -101,11 +106,15 @@ t_element	*push_swap(t_element *a)
 
 int	main(int argc, char **argv)
 {
-	t_element	*a;
-	t_element	*b;
+	t_list	**a;
+	t_list	**b;
 
-	a = NULL;
-	b = NULL;
+	a = (t_list **)malloc(sizeof(t_list));
+	b = (t_list **)malloc(sizeof(t_list));
+	if (a == NULL || b == NULL)
+		return (-1);
+	*a = NULL;
+	*b = NULL;
 	if (argc == 2)
 		if (!ft_argv_compliant(argv[1])) // Fonction a corriger : retour incorrect sur les doubles signes --, ++, -+, etc...
 			return (-1);
@@ -114,47 +123,51 @@ int	main(int argc, char **argv)
 		ft_putstr("Error : le nombre d'argument doit etre de 1.\n");
 		return (0);
 	}
-	a = ft_convert_argv(a, argv[1]);
-	// Test des fonctions sa, sb et ss :
-	printf("Avant fonction sa\n");
-	ft_print_stack(a);
+	*a = ft_convert_argv(*a, argv[1]);
+	if (push_swap(*a))
+		ft_print_stack(*a);
+	printf("**********************************************************************************\n");
+	// Test des fonctions sa, sb et ss (test OK):
+/*	printf("Avant fonction sa\n");
+	ft_print_stack(*a);
 	printf("\nApres fonction sa. Les deux premiers elements switchent.\n");
-	a = sa(a);
-	ft_print_stack(a);
-	// Test des fonctions pa et pb :
-	printf("\nAvant fonction ra\n");
-	ft_print_stack(a);
+	sa(a);
+	ft_print_stack(*a);
+*/	// Test des fonctions ra et rb (test OK):
+/*	printf("\nAvant fonction ra\n");
+	ft_print_stack(*a);
 	printf("\nApres fonction ra. Le premier element passe en dernier.\n");
-	a = ra(a);
-	ft_print_stack(a);
-	// Test des fonctions rra et rrb
-	printf("\nAvant fonction rra\n");
-	ft_print_stack(a);
+	ra(a);
+	ft_print_stack(*a);
+*/	// Test des fonctions rra et rrb
+/*	printf("\nAvant fonction rra\n");
+	ft_print_stack(*a);
 	printf("\nApres fonction rra - Le dernier element passe en premier.\n");
-	a = rra(a);
-	ft_print_stack(a);
+	rra(a);
+	ft_print_stack(*a);
+*/
 	// Test des fonctions pa et pb
-	printf("\nAvant fonction pb\n");
+/*	printf("\nAvant fonction pb\n");
 	printf("Pile A :\n");
-	ft_print_stack(a);
+	ft_print_stack(*a);
 	printf("Pile B :\n");
-	ft_print_stack(b);
+	ft_print_stack(*b);
+
 	printf("\nApres fonction pb. Prend le premier element de a pour le mettre en haut de b.\n");
-	b = pb(a, b);
-	a = ft_free_top_stack(a);
+	pb(a, b);
 	printf("Pile A :\n");
-	ft_print_stack(a);
+	ft_print_stack(*a);
 	printf("Pile B :\n");
-	ft_print_stack(b);
+	ft_print_stack(*b);
+
 	printf("\nApres fonction pa. Prend le premier element de b pour le mettre en haut de a.\n");
-	a = pa(a, b);
-	b = ft_free_top_stack(b);
+	pa(a, b);
 	printf("Pile A :\n");
-	ft_print_stack(a);
+	ft_print_stack(*a);
 	printf("Pile B :\n");
-	ft_print_stack(b);
-	
-	a = ft_free_stack(a);
-	b = ft_free_stack(b);
+	ft_print_stack(*b);
+*/	
+	ft_free_stack(*a);
+	ft_free_stack(*b);
 	return (0);
 }

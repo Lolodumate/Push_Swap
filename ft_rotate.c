@@ -6,60 +6,73 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:43:01 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/20 16:52:55 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/25 18:14:59 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_element	*ra(t_element *a)
+void	ra(t_list **a)
 {
-	t_element	*new_top;
-	t_element	*old_top;
+	t_list		*top;
+	t_list		*tmp;
+	t_list		*new_top;
 
-	new_top = a->next;
-	old_top = a;
-	if (a != NULL)
+	top = *a;
+	tmp = *a;
+	new_top = top->next;
+	top->position = 1;
+	if (a)
 	{
-		while (a->next != NULL)
+		while (tmp)
 		{
-			a->position++;
-			a = a->next;
+			if (tmp->next == NULL)
+			{
+				tmp->next = top;
+				tmp = tmp->next;
+				tmp->next = NULL;
+				*a = new_top;
+				break ;
+			}
+			tmp = tmp->next;
+			tmp->position++;
 		}
-		a->position++;
-		a->next = old_top;
-		a = a->next;
-		a->position = 1;
-		a->next = NULL;
+		ft_putstr("ra\n");
 	}
-	return (new_top);
 }
 
-t_element	*rb(t_element *b)
+void	rb(t_list **b)
 {
-	t_element	*new_top;
-	t_element	*old_top;
+	t_list		*top;
+	t_list		*tmp;
+	t_list		*new_top;
 
-	new_top = b->next;
-	old_top = b;
-	if (b != NULL)
+	top = *b;
+	tmp = *b;
+	new_top = top->next;
+	top->position = 1;
+	if (b)
 	{
-		while (b->next != NULL)
+		while (tmp)
 		{
-			b->position++;
-			b = b->next;
+			if (tmp->next == NULL)
+			{
+				tmp->next = top;
+				tmp = tmp->next;
+				tmp->next = NULL;
+				*b = new_top;
+				break ;
+			}
+			tmp = tmp->next;
+			tmp->position++;
 		}
-		b->position++;
-		b->next = old_top;
-		b = b->next;
-		b->position = 1;
-		b->next = NULL;
+		ft_putstr("rb\n");
 	}
-	return (new_top);
 }
 
-void	rr(t_element *a, t_element *b)
+void	rr(t_list **a, t_list **b)
 {
 	ra(a);
 	rb(b);
+	ft_putstr("rr\n");
 }

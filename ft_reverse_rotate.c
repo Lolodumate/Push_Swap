@@ -6,68 +6,68 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 21:32:05 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/20 17:39:27 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/25 19:15:04 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_element	*rra(t_element *a)
+void	rra(t_list **a)
 {
-	t_element	*final_element;
-	t_element	*top_stack;
-	int	e_position;
+	t_list	*top;
+	t_list	*tmp;
+	int	pos;
 
-	final_element = a;
-	top_stack = a;
-	e_position = a->position + 1;
-	if (a != NULL && a->next != NULL)
+	top = *a;
+	tmp = ft_lstlast(*a);
+	pos = 0;
+	if (a)
 	{
-		while (a->next != NULL)
-			a = a->next;
-		final_element = a;
-		a->next = top_stack;
-		a->position = e_position;
-		top_stack = a;
-		while (a->next != final_element)
+		pos = top->position;
+		tmp->position = pos;
+		tmp->next = top;
+		top = tmp;
+		while (tmp)
 		{
-			a->position--;
-			a = a->next;
+			if (tmp->position == 1)
+				tmp->next = NULL;
+			tmp = tmp->next;
+			pos--;
+			if (tmp)
+				tmp->position = pos;
 		}
-		a->position--;
-		a->next = NULL;
+		*a = top;
+		ft_putstr("rra\n");
 	}
-	return (top_stack);
 }
 
-t_element	*rrb(t_element *b)
+void	rrb(t_list **b)
 {
-	t_element	*final_element;
-	t_element	*top_stack;
-	int	e_position;
+	t_list	*top;
+	t_list	*tmp;
+	int	pos;
 
-
-	final_element = b;
-	top_stack = b;
-	e_position = b->position + 1;
-	if (b != NULL && b->next != NULL)
+	top = *b;
+	tmp = ft_lstlast(*b);
+	pos = top->position;
+	if (b)
 	{
-		while (b->next != NULL)
-			b = b->next;
-		final_element = b;
-		b->next = top_stack;
-		b->position = e_position;
-		top_stack = b;
-		while (b->next != final_element)
-			b = b->next;
-		b->position--;
-		b->next = NULL;
+		tmp->position = pos;
+		tmp->next = top;
+		while (tmp && tmp->position > 0)
+		{
+			tmp = tmp->next;
+			tmp->position--;
+			if (tmp->position == 1)
+				tmp->next = NULL;
+		}
+		ft_putstr("rra\n");
 	}
-	return (top_stack);
 }
 
-void	rrr(t_element *a, t_element *b)
+void	rrr(t_list **a, t_list **b)
 {
 	rra(a);
 	rrb(b);
+	ft_putstr("rrr\n");
 }

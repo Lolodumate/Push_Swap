@@ -6,46 +6,62 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:10:23 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/22 15:42:31 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/25 19:53:04 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-t_element	*pa(t_element *a, t_element *b) // Deplace le premier element de b sur la pile a
+void	pa(t_list **a, t_list **b) // Deplace le premier element de b sur la pile a
 {
-	int		e_position;
+	int		pos;
+	t_list	*stack_a;
+	t_list	*stack_b;
+	t_list	*tmp;
 
-	e_position = 0;
-	if (b == NULL)
-		return (NULL);
-	if (a == NULL)
-		e_position = 1;
-	else
-		e_position = a->position + 1;
-	a = ft_add_element(a, b->value, e_position);
-	return (a);
+	pos = 1;
+	stack_a = *a;
+	stack_b = *b;
+	tmp = *b;
+	if (stack_b == NULL)
+		return ;
+	tmp = tmp->next;
+	if (stack_a != NULL)
+		pos = stack_a->position + 1;
+	stack_b->next = stack_a;
+	stack_b->position = pos;
+	*a = stack_b;
+	*b = tmp;
+	ft_putstr("pa\n");
 }
 
-t_element	*pb(t_element *a, t_element *b) // Deplace le premier element de a sur la pile b
+void	pb(t_list **a, t_list **b) // Deplace le premier element de a sur la pile b
 {
-	int		e_position;
+	int		pos;
+	t_list	*stack_a;
+	t_list	*stack_b;
+	t_list	*tmp;
 
-	e_position = 0;
-	if (a == NULL)
-		return (NULL);
-	if (b == NULL)
-		e_position = 1;
-	else
-		e_position = b->position + 1;
-	b = ft_add_element(b, a->value, e_position);
-	return (b);
+	pos = 1;
+	stack_a = *a;
+	stack_b = *b;
+	tmp = *a;
+	if (stack_a == NULL)
+		return ;
+	tmp = tmp->next;
+	if (stack_b != NULL)
+		pos = stack_b->position + 1;
+	stack_a->next = stack_b;
+	stack_a->position = pos;
+	*b = stack_a;
+	*a = tmp;
+	ft_putstr("pb\n");
 }
 
-t_element	*ft_free_top_stack(t_element *e)
+t_list	*ft_free_top_stack(t_list *e)
 {
-	t_element	*tmp;
+	t_list	*tmp;
 
 	if (e == NULL)
 		return (NULL);
