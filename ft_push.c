@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:10:23 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/25 19:53:04 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/26 18:13:40 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	pa(t_list **a, t_list **b) // Deplace le premier element de b sur la pile a
 		pos = stack_a->position + 1;
 	stack_b->next = stack_a;
 	stack_b->position = pos;
+	stack_b->name_stack = 'A';
 	*a = stack_b;
 	*b = tmp;
 	ft_putstr("pa\n");
@@ -54,18 +55,8 @@ void	pb(t_list **a, t_list **b) // Deplace le premier element de a sur la pile b
 		pos = stack_b->position + 1;
 	stack_a->next = stack_b;
 	stack_a->position = pos;
+	stack_a->name_stack = 'B';
 	*b = stack_a;
 	*a = tmp;
 	ft_putstr("pb\n");
-}
-
-t_list	*ft_free_top_stack(t_list *e)
-{
-	t_list	*tmp;
-
-	if (e == NULL)
-		return (NULL);
-	tmp = e->next;
-	free(e);
-	return (tmp);
 }

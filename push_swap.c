@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:29:24 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/25 19:55:36 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/26 21:02:08 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,11 @@ int	main(int argc, char **argv)
 {
 	t_list	**a;
 	t_list	**b;
+	t_list	*tmp;
 
 	a = (t_list **)malloc(sizeof(t_list));
 	b = (t_list **)malloc(sizeof(t_list));
+	tmp = *a;
 	if (a == NULL || b == NULL)
 		return (-1);
 	*a = NULL;
@@ -126,6 +128,24 @@ int	main(int argc, char **argv)
 	*a = ft_convert_argv(*a, argv[1]);
 	if (push_swap(*a))
 		ft_print_stack(*a);
+	if (ft_check_list_and_fill_index(a))
+		printf("La liste est triee.\n");
+	tmp = ft_smallest_value(a);
+	printf("Plus petite valeur - Position, index et valeur : #%d - Index = [%d] - Valeur = [%d]\n", tmp->position, tmp->index, tmp->value);
+	tmp = ft_greatest_value(a);
+	printf("Plus grande valeur - Position, index et valeur : #%d - Index = [%d] - Valeur = [%d]\n", tmp->position, tmp->index, tmp->value);
+	ft_print_stack(*a);
+	ft_print_stack(*b);
+	
+	ft_pb(a, b);
+	printf("Pile A\n");
+	ft_print_stack(*a);
+	printf("Pile B\n");
+	ft_print_stack(*b);
+
+	ft_sort_list(b);
+	printf("Pile B apres ft_sort_list(b)\n");
+	ft_print_stack(*b);
 	printf("**********************************************************************************\n");
 	// Test des fonctions sa, sb et ss (test OK):
 /*	printf("Avant fonction sa\n");

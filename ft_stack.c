@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:12:47 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/25 13:40:29 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/25 20:45:12 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ t_list	*ft_free_stack(t_list *e)
 		return (NULL);
 	tmp = e->next;
 	free(e);
+	if (tmp == NULL)
+		return (NULL);
 	if (tmp == NULL)
 		printf("La pile a ete nettoyee.\n");
 	return (ft_free_stack(tmp));

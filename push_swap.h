@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:30:04 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/25 19:54:58 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/26 19:50:04 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,33 @@ int			ft_argv_compliant(char *str);
 int			ft_isdigit(char c);
 int			ft_atoi(char *str);
 int			ft_strchr(char *str, char c);
+int			ft_check_list_and_fill_index(t_list **lst);
 int			ft_convert_int(char *str, int i);
+int			ft_sort(t_list **a, t_list **b);
+t_list			*ft_smallest_value(t_list **lst);
+t_list			*ft_greatest_value(t_list **lst);
+void		ft_pb(t_list **a, t_list **b);
 void		ft_print_stack(t_list *e);
 void		ft_putstr(char *str);
+void		ft_sort_list(t_list **b);
 void		ft_swap(int *a, int *b);
-void		sa(t_list **a); // Test OK
-void		sb(t_list **b); // Test OK
+void		sa(t_list **a); // Swap les deux premiers. Test OK
+void		sb(t_list **b); // Swap les deux premiers. Test OK
 void		ss(t_list **a, t_list **b);
-void		ra(t_list **a); // Test OK
-void		rb(t_list **b); // Test OK
+void		ra(t_list **a); // Le premier devient le dernier. Test OK
+void		rb(t_list **b); // Le premier devient le dernier. Test OK
 void		rr(t_list **a, t_list **b);
-void		rra(t_list **a); // Test OK
-void		rrb(t_list **b); // Test OK
+void		rra(t_list **a); // Le dernier devient le premier. Test OK
+void		rrb(t_list **b); // Le dernier devient le premier. Test OK
 void		rrr(t_list **a, t_list **b);
-void		pa(t_list **a, t_list **b); // Test OK
-void		pb(t_list **a, t_list **b); // Test OK
+void		pa(t_list **a, t_list **b); // Le premier de b va sur le sommet de a. Test OK
+void		pb(t_list **a, t_list **b); // Le premier de a va sur le sommet de b. Test OK
+t_list	*ft_lstnew(void *content); // Retourne un nouveau noeud qui contient la valeur 'content'. 'next' est egal a NULL.
 
 /*void		ft_update_position(t_list *a, t_list *b);
 */
+
 // Fonctions de la libft
-t_list	*ft_lstnew(void *content); // Retourne un nouveau noeud qui contient la valeur 'content'. 'next' est egal a NULL.
 void	ft_lstadd_front(t_list **lst, t_list *new); // Ajoute le noeud 'new' au debut de la liste.
 int	ft_lstsize(t_list *lst); // Compte le nombre de noeuds dans une liste.
 t_list	*ft_lstlast(t_list *lst); // Retourne le dernier noeud de la liste.
@@ -65,7 +72,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *)); // Iter
 t_list		*ft_convert_argv(t_list *e, char *str);
 t_list		*ft_add_node(t_list *e, int e_value, int position);
 t_list		*ft_free_stack(t_list *e);
-t_list		*ft_free_top_stack(t_list *e);
 t_list		*ft_check_duplicate(int	value, t_list *e);
 t_list		*push_swap(t_list *a);
 

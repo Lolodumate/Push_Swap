@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:41:53 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/25 14:00:16 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/26 15:54:17 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	ft_print_stack(t_list *e)
 	}
 	while (e)
 	{
-		printf("#%d - Pile [%c] - [%d]\n", e->position, e->name_stack, e->value);
+		printf("#%d - Pile [%c] - Index [%d] - Valeur [%d]\n", e->position, e->name_stack, e->index, e->value);
 		e = e->next;
 		if (e == NULL)
 			printf("Fin de la pile.\n\n");
