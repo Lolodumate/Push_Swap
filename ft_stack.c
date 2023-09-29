@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:12:47 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/25 20:45:12 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/29 00:45:14 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,19 @@ t_list	*ft_add_node(t_list *e, int e_value, int e_position)
 	return (tmp);
 }
 
-t_list	*ft_free_stack(t_list *e)
+t_list	*ft_free_stack(t_list *lst)
 {
 	t_list	*tmp;
 
-	if (e == NULL)
-		return (NULL);
-	tmp = e->next;
-	free(e);
-	if (tmp == NULL)
-		return (NULL);
-	if (tmp == NULL)
+	tmp = lst;
+	if (lst == NULL)
+	{
 		printf("La pile a ete nettoyee.\n");
+		return (NULL);
+	}
+	if (tmp)
+		tmp = tmp->next;
+	free(lst);
 	return (ft_free_stack(tmp));
 }
 

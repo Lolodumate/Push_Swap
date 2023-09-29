@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:29:24 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/26 21:02:08 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/29 03:22:10 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,13 @@ int	main(int argc, char **argv)
 {
 	t_list	**a;
 	t_list	**b;
-	t_list	*tmp;
+//	t_list	*tmp;
+	int	count;
 
 	a = (t_list **)malloc(sizeof(t_list));
 	b = (t_list **)malloc(sizeof(t_list));
-	tmp = *a;
+//	tmp = *a;
+	count = 0;
 	if (a == NULL || b == NULL)
 		return (-1);
 	*a = NULL;
@@ -129,24 +131,38 @@ int	main(int argc, char **argv)
 	if (push_swap(*a))
 		ft_print_stack(*a);
 	if (ft_check_list_and_fill_index(a))
+	{
 		printf("La liste est triee.\n");
-	tmp = ft_smallest_value(a);
+		ft_free_stack(*a);
+		free(a);
+		ft_free_stack(*b);
+		free(b);
+		return (0);
+	}
+
+	count = ft_fill_index(a, b);
+	ft_print_stack(*a);
+	ft_print_stack(*b);
+	printf("Valeur de count = %d\n", count);
+
+	ft_pa(a, b);
+	ft_print_stack(*a);
+	ft_print_stack(*b);
+
+	if (ft_check_list_and_fill_index(a))
+		printf("La liste est triee.\n");
+
+/*	tmp = ft_smallest_value(a);
 	printf("Plus petite valeur - Position, index et valeur : #%d - Index = [%d] - Valeur = [%d]\n", tmp->position, tmp->index, tmp->value);
 	tmp = ft_greatest_value(a);
 	printf("Plus grande valeur - Position, index et valeur : #%d - Index = [%d] - Valeur = [%d]\n", tmp->position, tmp->index, tmp->value);
 	ft_print_stack(*a);
 	ft_print_stack(*b);
 	
-	ft_pb(a, b);
-	printf("Pile A\n");
-	ft_print_stack(*a);
-	printf("Pile B\n");
-	ft_print_stack(*b);
-
 	ft_sort_list(b);
 	printf("Pile B apres ft_sort_list(b)\n");
 	ft_print_stack(*b);
-	printf("**********************************************************************************\n");
+*/	printf("**********************************************************************************\n");
 	// Test des fonctions sa, sb et ss (test OK):
 /*	printf("Avant fonction sa\n");
 	ft_print_stack(*a);
@@ -187,7 +203,11 @@ int	main(int argc, char **argv)
 	printf("Pile B :\n");
 	ft_print_stack(*b);
 */	
+	printf("Nettoyage Pile A : ");
 	ft_free_stack(*a);
+	free(a);
+	printf("Nettoyage Pile B : ");
 	ft_free_stack(*b);
+	free(b);
 	return (0);
 }

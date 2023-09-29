@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 21:07:27 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/26 21:28:57 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/29 08:39:04 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,42 +42,6 @@ int	ft_check_list_and_fill_index(t_list **lst)
 }
 
 // Chaque valeur se voit attribuer un index qui correspond a sa position dans l'ordre croissant de la liste
-void	ft_pb(t_list **a, t_list **b)
-{
-	t_list	*stack_a;
-	t_list	*stack_b;
-	int	i;
-	int	nb_values;
-	int	n;
-
-	stack_a = *a;
-	stack_b = *b;
-	i = 0;
-	nb_values = stack_a->position;
-	n = 0;
-	while (stack_a && i < nb_values)
-	{
-		if (stack_a && stack_a->index > 0)
-			ra(a);
-		else
-		{
-			pb(a, b);
-			stack_b = *b;
-			n = stack_b->value;
-			stack_b = stack_b->next;
-			if (stack_b && n > stack_b->value)
-			{
-				stack_b->index = 0;
-				sb(b);
-				ft_smallest_value(b);
-			}
-			ft_check_list_and_fill_index(b);
-		}
-		stack_a = *a;
-		i++;
-	}
-}
-
 void	ft_sort_list(t_list **b)
 {
 	t_list		*tmp;
@@ -91,9 +55,77 @@ void	ft_sort_list(t_list **b)
 		tmp = *b;
 		printf("ft_sort_list(b) - Position de tmp = #%d\n", tmp->position);
 		ft_print_stack(*b);
-		ft_check_list_and_fill_index(b);
+		if (ft_check_list_and_fill_index(b) == 0)
+			sb(b);
 		printf("ft_sort_list(b) - Position de tmp = #%d\n", tmp->position);
 	}
+}
+
+/*
+void	ft_sort_small_stack(t_list **a)
+{
+
+}
+*/
+
+/*
+void	ft_sort_big_stack(t_list **a)
+{
+
+}
+*/
+
+int	ft_fill_index(t_list **a, t_list **b)
+{
+	int		i;
+	int		counter;
+	t_list	*tmp;
+
+	i = 0;
+	counter = 0;
+	if (a == NULL)
+		return (-1);
+	tmp = *a;
+	// Evaluer la position du plus petit nombre dans la liste et determiner quelle fonction permet de le remonter en haut de la pile le plus rapidement (ra ou rra).
+	while (tmp)
+	{
+		tmp = ft_smallest_value(a);
+		ft_print_stack(*a);
+		if (tmp->index == 0)
+			tmp->index += i;
+/*		else
+			while (tmp && tmp->index != 0)
+				tmp = tmp->next;
+*/		tmp = *a;
+		
+
+/*
+		while (tmp && tmp->index == 0)
+		{
+			ra(a);
+			counter++;
+			tmp = *a;
+		}
+		pb(a, b);
+		ft_print_stack(*a);
+		ft_print_stack(*b);
+		tmp = *a;
+*/		i++;
+	}
+	pb(a, b);
+	ft_print_stack(*b);
+	return (counter + i);
+}
+
+t_list	*ft_pa(t_list **a, t_list **b)
+{
+	t_list	*tmp;
+
+	tmp = *b;
+	pa(a, b);
+	if (tmp == NULL)
+		return (NULL);
+	return (ft_pa(a, b));
 }
 
 t_list	*ft_smallest_value(t_list **lst) // Test OK
@@ -108,7 +140,7 @@ t_list	*ft_smallest_value(t_list **lst) // Test OK
 	while (tmp)
 	{
 		tmp = tmp->next;
-		if (tmp && smallest > tmp->value)
+		if (tmp && smallest > tmp->value && tmp->index == 0)
 		{
 			t_small = tmp;
 			smallest = tmp->value;
@@ -118,17 +150,15 @@ t_list	*ft_smallest_value(t_list **lst) // Test OK
 	return (t_small);
 }
 
-t_list	*ft_greatest_value(t_list **lst) // Test OK
+t_list	*ft_greatest_value(t_list **lst)
 {
 	t_list		*tmp;
 	t_list		*t_great;
 	int	greatest;
-//	int	i;
 
 	tmp = *lst;
 	t_great = tmp;
 	greatest = tmp->value;
-//	i = tmp->position;
 	while (tmp)
 	{
 		tmp = tmp->next;
@@ -138,14 +168,5 @@ t_list	*ft_greatest_value(t_list **lst) // Test OK
 			greatest = tmp->value;
 		}
 	}
-//	t_great->index = i;
 	return (t_great);
 }
-/*
-int	ft_sort(t_list **a, t_list **b)
-{
-	while (ft_check_list(*a) == 0)
-	{
-		
-	}
-}*/

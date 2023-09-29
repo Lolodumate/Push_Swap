@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:41:53 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/26 15:54:17 by laroges          ###   ########.fr       */
+/*   Updated: 2023/09/28 23:32:03 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,18 +103,22 @@ int	ft_atoi(char *str)
 	return (res * sign);
 }
 
-void	ft_print_stack(t_list *e)
+void	ft_print_stack(t_list *lst)
 {
-	if (e == NULL)
+	char	lst_name;
+
+	lst_name = 0;
+	if (lst == NULL)
 	{
-		printf("La pile est vide\n");
+		printf("La pile est vide\n\n");
 		return ;
 	}
-	while (e)
+	lst_name = lst->name_stack;
+	while (lst)
 	{
-		printf("#%d - Pile [%c] - Index [%d] - Valeur [%d]\n", e->position, e->name_stack, e->index, e->value);
-		e = e->next;
-		if (e == NULL)
-			printf("Fin de la pile.\n\n");
+		printf("#%d - Pile [%c] - Index [%d] - Valeur [%d]\n", lst->position, lst->name_stack, lst->index, lst->value);
+		lst = lst->next;
+		if (lst == NULL)
+			printf("Fin de la pile %c.\n\n", lst_name);
 	}
 }
