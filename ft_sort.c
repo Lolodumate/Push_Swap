@@ -27,17 +27,17 @@ int	ft_check_list_and_fill_index(t_list **lst)
 	{
 		n = tmp->value;
 		tmp = tmp->next;
-		if (tmp && n > tmp->value && tmp->index != 1)
+		if (tmp && n > tmp->value)
 		{
-			tmp->index = 0;
+//			tmp->index = 0;
 			return (0);
 		}
-		if (tmp && tmp->index != 1)
+/*		if (tmp && tmp->index != 1)
 		{
 			i++;
 			tmp->index = i;
 		}
-	}
+*/	}
 	return (i);
 }
 
@@ -78,27 +78,46 @@ void	ft_sort_big_stack(t_list **a)
 int	ft_fill_index(t_list **a, t_list **b)
 {
 	int		i;
-	int		pos;
+//	int		pos;
 	int		counter;
+	char	*bits;
 	t_list	*tmp;
 
 	i = 0;
-	pos = 0;
+//	pos = 0;
 	counter = 0;
 	if (a == NULL)
 		return (-1);
+	bits = malloc(sizeof(char) * 8 + 1);
+	if (bits == NULL)
+		return (-1);
+	bits[0] = '\0';
 	tmp = *a;
-	pos = tmp->position;
+//	pos = tmp->position;
 	// Evaluer la position du plus petit nombre dans la liste et determiner quelle fonction permet de le remonter en haut de la pile le plus rapidement (ra ou rra).
-	while (tmp && i < pos)
+	while (tmp /*&& i < pos*/)
 	{
-		i++;
 		tmp = ft_smallest_value(a);
+		if (tmp == NULL)
+		{
+			printf("Valeur de tmp = NULL\n");
+			break ;
+		}
 		ft_print_stack(*a);
-		tmp->index = i;
-		tmp = *a;
+		if (tmp != NULL)
+		{	
+			i++;
+			printf(">>>>>>>>>>>>>>>>>Valeur de i = %d\n", i);
+			tmp->index = i;
+			tmp->smallest_value_indicator = 0;
+			bits = ft_convert_binary(i);
+			tmp->binary_index = bits;
+			tmp = *a;
+		}
+//		tmp = *a;
 	}
 	ft_print_stack(*b);
+	free(bits);
 	return (counter + i);
 }
 
@@ -118,19 +137,53 @@ t_list	*ft_smallest_value(t_list **lst) // Test OK
 	t_list		*tmp;
 	t_list		*t_small;
 	int	smallest;
+	int	i;
 
 	tmp = *lst;
-	t_small = tmp;
-	smallest = tmp->value;
+	t_small = *lst;
+	smallest = 0;
+	i = 0;
+	while (t_small && t_small->index != 0)
+	{
+		i++;
+		if (t_small->next)
+			t_small = t_small->next;
+		else
+		{
+			t_small->smallest_value_indicator = 1;
+			break ;
+		}
+	}
+	printf("xxxxxxxxxxxxxxxxxxxValeur de i = %d\n", i);
+	if (t_small == NULL)
+		printf("NNNNNNNNNNNNNNNN t_small est NULL !!!!\n");
+	if (i == tmp->position)
+	{
+		t_small->index = tmp->position;
+		t_small->smallest_value_indicator = 1;
+		t_small = t_small->next;
+		return (t_small);
+	}
+	if (t_small == NULL)
+		return (NULL);
+	smallest = t_small->value;
+	t_small->smallest_value_indicator = 1;
+	printf("*************Valeur de t_small->value = %d\n", t_small->value);
+	ft_print_stack(*lst);
 	while (tmp)
 	{
 		tmp = tmp->next;
 		if (tmp && smallest > tmp->value && tmp->index == 0)
 		{
+			t_small->smallest_value_indicator = 0;
 			t_small = tmp;
 			smallest = tmp->value;
+			t_small->smallest_value_indicator = 1;
+			printf("Valeur de tmp->value et smallest = %d\n", smallest);
 		}
 	}
+	if (tmp == NULL && t_small->index != 0)
+		t_small = NULL;
 	return (t_small);
 }
 

@@ -18,12 +18,19 @@ t_list	*ft_add_node(t_list *e, int e_value, int e_position)
 	
 	tmp = malloc(sizeof(*tmp));
 	if (tmp == NULL)
+	{
+		ft_free_stack(e);
 		return (NULL);
+	}
 	tmp->ptr_node = tmp;
 	tmp->value = e_value;
 	tmp->position = e_position;
 	tmp->index = 0;
 	tmp->count = 0;
+	tmp->binary_index = malloc(sizeof(char) * 8 + 1);
+	if (tmp->binary_index == NULL)
+		return (NULL);
+	tmp->binary_index = '\0';
 	tmp->next = e;
 	return (tmp);
 }
@@ -38,8 +45,7 @@ t_list	*ft_free_stack(t_list *lst)
 		printf("La pile a ete nettoyee.\n");
 		return (NULL);
 	}
-	if (tmp)
-		tmp = tmp->next;
+	tmp = tmp->next;
 	free(lst);
 	return (ft_free_stack(tmp));
 }

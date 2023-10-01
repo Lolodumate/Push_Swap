@@ -20,10 +20,11 @@
 typedef struct	s_list
 {
 	int			value;
+	int			smallest_value_indicator;
 	int			position;
 	int			index;
 	int			count;
-	char			binary_index[8];
+	char			*binary_index;
 	char		name_stack;
 	struct	s_list	*ptr_node;
 	struct	s_list	*next;
