@@ -78,41 +78,26 @@ void	ft_sort_big_stack(t_list **a)
 int	ft_fill_index(t_list **a, t_list **b)
 {
 	int		i;
+	int		pos;
 	int		counter;
 	t_list	*tmp;
 
 	i = 0;
+	pos = 0;
 	counter = 0;
 	if (a == NULL)
 		return (-1);
 	tmp = *a;
+	pos = tmp->position;
 	// Evaluer la position du plus petit nombre dans la liste et determiner quelle fonction permet de le remonter en haut de la pile le plus rapidement (ra ou rra).
-	while (tmp)
+	while (tmp && i < pos)
 	{
+		i++;
 		tmp = ft_smallest_value(a);
 		ft_print_stack(*a);
-		if (tmp->index == 0)
-			tmp->index += i;
-/*		else
-			while (tmp && tmp->index != 0)
-				tmp = tmp->next;
-*/		tmp = *a;
-		
-
-/*
-		while (tmp && tmp->index == 0)
-		{
-			ra(a);
-			counter++;
-			tmp = *a;
-		}
-		pb(a, b);
-		ft_print_stack(*a);
-		ft_print_stack(*b);
+		tmp->index = i;
 		tmp = *a;
-*/		i++;
 	}
-	pb(a, b);
 	ft_print_stack(*b);
 	return (counter + i);
 }
@@ -146,7 +131,6 @@ t_list	*ft_smallest_value(t_list **lst) // Test OK
 			smallest = tmp->value;
 		}
 	}
-	t_small->index = 1;
 	return (t_small);
 }
 
@@ -158,7 +142,7 @@ t_list	*ft_greatest_value(t_list **lst)
 
 	tmp = *lst;
 	t_great = tmp;
-	greatest = tmp->value;
+	greatest = t_great->value;
 	while (tmp)
 	{
 		tmp = tmp->next;

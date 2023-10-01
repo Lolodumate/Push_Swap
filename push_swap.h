@@ -23,6 +23,7 @@ typedef struct	s_list
 	int			position;
 	int			index;
 	int			count;
+	char			binary_index[8];
 	char		name_stack;
 	struct	s_list	*ptr_node;
 	struct	s_list	*next;
@@ -46,6 +47,7 @@ void		ft_sort_list(t_list **b);
 void		ft_swap(int *a, int *b);
 void		ft_sort_small_stack(t_list **a);
 void		ft_sort_big_stack(t_list **b);
+char		*ft_convert_binary(int index);
 void		sa(t_list **a); // Swap les deux premiers. Test OK
 void		sb(t_list **b); // Swap les deux premiers. Test OK
 void		ss(t_list **a, t_list **b);

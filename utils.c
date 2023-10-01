@@ -80,6 +80,35 @@ int	ft_convert_int(char *str, int i)
 	return (value);
 }
 
+// Convertir les index en binaire
+char	*ft_convert_binary(int index)
+{
+	int		i;
+	int		j;
+	char	bits[8];
+	char	*res;
+
+	i = 0;
+	j = 0;
+	res = malloc(sizeof(char) * 8 + 1);
+	if (res == NULL)
+		return (NULL);
+	while (i < 8)
+	{
+		bits[i] = (index % 2) + '0';
+		index /= 2;
+		i++;
+	}
+	i = 7;
+	while (i >= 0)
+	{
+		res[j] = bits[i];
+		j++;
+		i--;
+	}
+	return (res);
+}
+
 int	ft_atoi(char *str)
 {
 	int	i;
