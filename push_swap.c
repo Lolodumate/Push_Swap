@@ -128,8 +128,13 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	*a = ft_convert_argv(*a, argv[1]);
+	if (*a == NULL)
+	{
+		free(a);
+		free(b);	
+	}
 	if (push_swap(*a))
-		ft_print_stack(*a);
+		ft_print_stack(a);
 	if (ft_check_list_and_fill_index(a))
 	{
 		printf("La liste est triee.\n");
@@ -140,14 +145,14 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 
-	count = ft_fill_index(a, b);
-	ft_print_stack(*a);
-	ft_print_stack(*b);
+	count = ft_fill_index(a);
+	ft_print_stack(a);
+	ft_print_stack(b);
 	printf("Valeur de count = %d\n", count);
 
 	ft_pa(a, b);
-	ft_print_stack(*a);
-	ft_print_stack(*b);
+	ft_print_stack(a);
+	ft_print_stack(b);
 
 	if (ft_check_list_and_fill_index(a))
 		printf("La liste est triee.\n");

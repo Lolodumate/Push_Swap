@@ -81,18 +81,20 @@ int	ft_convert_int(char *str, int i)
 }
 
 // Convertir les index en binaire
-char	*ft_convert_binary(int index)
+int	ft_convert_binary(int index)
 {
 	int		i;
 	int		j;
+	int		bits_int;
 	char	bits[8];
 	char	*res;
 
 	i = 0;
 	j = 0;
+	bits_int = 0;
 	res = malloc(sizeof(char) * 8 + 1);
 	if (res == NULL)
-		return (NULL);
+		return (-1);
 	while (i < 8)
 	{
 		bits[i] = (index % 2) + '0';
@@ -106,7 +108,9 @@ char	*ft_convert_binary(int index)
 		j++;
 		i--;
 	}
-	return (res);
+	bits_int = ft_atoi(res);
+	free(res);
+	return (bits_int);
 }
 
 int	ft_atoi(char *str)
@@ -132,22 +136,24 @@ int	ft_atoi(char *str)
 	return (res * sign);
 }
 
-void	ft_print_stack(t_list *lst)
+void	ft_print_stack(t_list **lst)
 {
 	char	lst_name;
+	t_list	*tmp;
 
 	lst_name = 0;
-	if (lst == NULL)
+	tmp = *lst;
+	if (tmp == NULL)
 	{
 		printf("La pile est vide\n\n");
 		return ;
 	}
-	lst_name = lst->name_stack;
-	while (lst)
+	lst_name = tmp->name_stack;
+	while (tmp)
 	{
-		printf("#%d - Pile [%c] - Index [%d] - Index_Binaire %s - Smallest [%d] - Valeur [%d]\n", lst->position, lst->name_stack, lst->index, lst->binary_index,lst->smallest_value_indicator, lst->value);
-		lst = lst->next;
-		if (lst == NULL)
+		printf("#%d - Pile [%c] - Index [%d] - Index_Binaire %d - Smallest [%d] - Valeur [%d]\n", tmp->position, tmp->name_stack, tmp->index, tmp->binary_index, tmp->smallest_value_indicator, tmp->value);
+		tmp = tmp->next;
+		if (tmp == NULL)
 			printf("Fin de la pile %c.\n\n", lst_name);
 	}
 }
