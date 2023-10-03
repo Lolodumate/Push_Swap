@@ -95,6 +95,7 @@ int	ft_convert_binary(int index)
 	res = malloc(sizeof(char) * 8 + 1);
 	if (res == NULL)
 		return (-1);
+	res[8] = '\0';
 	while (i < 8)
 	{
 		bits[i] = (index % 2) + '0';
@@ -111,49 +112,4 @@ int	ft_convert_binary(int index)
 	bits_int = ft_atoi(res);
 	free(res);
 	return (bits_int);
-}
-
-int	ft_atoi(char *str)
-{
-	int	i;
-	int	sign;
-	long	res;
-
-	i = 0;
-	sign = 1;
-	res = 0;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		res = (res * 10) + (str[i] - '0');
-		i++;
-	}
-	return (res * sign);
-}
-
-void	ft_print_stack(t_list **lst)
-{
-	char	lst_name;
-	t_list	*tmp;
-
-	lst_name = 0;
-	tmp = *lst;
-	if (tmp == NULL)
-	{
-		printf("La pile est vide\n\n");
-		return ;
-	}
-	lst_name = tmp->name_stack;
-	while (tmp)
-	{
-		printf("#%5d - Pile [%c] - Index [%5d] - I_Binaire %8d - I_tmp %8d - Valeur [%d]\n", tmp->position, tmp->name_stack, tmp->index, tmp->binary_index, tmp->index_tmp, tmp->value);
-		tmp = tmp->next;
-		if (tmp == NULL)
-			printf("Fin de la pile %c.\n\n", lst_name);
-	}
 }

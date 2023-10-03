@@ -71,7 +71,6 @@ int	ft_push_zero(t_list **a, t_list **b)
 	greatest_binary = ft_greatest_len_binary(a);
 	while (greatest_binary > 0)
 	{
-		printf("greatest_binary = %d\n", greatest_binary);
 		pos = (*a)->position;
 		while (*a && pos-- > 0) // tmp_a == *a
 		{
@@ -83,23 +82,11 @@ int	ft_push_zero(t_list **a, t_list **b)
 				ra(a);
 			count++;
 			tmp_a = *a;
-			if (tmp_a)
-			{
-				ft_print_stack(a);
-				ft_print_stack(b);
-			}
-			printf("*****************************************************************\n");
 		}
-		ft_print_stack(a);
-		ft_print_stack(b);
 		while (*b)
 		{
 			pa(a, b);
 			count++;
-//			printf("Position A = %d - Position B = %d\n", (*a)->position, (*b)->position);
-			ft_print_stack(a);
-			ft_print_stack(b);
-			printf("*****************************************************************\n");
 		}
 		greatest_binary--;
 	}

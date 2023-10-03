@@ -27,10 +27,10 @@ int	ft_argv_compliant(char *str)
 	}
 	if (str[i] == '\0')
 	{
-		ft_putstr("Le format de la liste est conforme.\n");
+		ft_putstr("push_swap.c l.30 A EFFACER - Le format de la liste est conforme.\n");
 		return (1);
 	}
-	ft_putstr("Error : le format de la liste n'est pas conforme.\n");
+	ft_putstr("push_swap.c l.33 A EFFACER - Error : le format de la liste n'est pas conforme.\n");
 	return (0);
 }
 
@@ -94,7 +94,7 @@ t_list	*push_swap(t_list *a)
 		if (ft_check_duplicate(a->value, a) != NULL) // Fonction a priori OK. Faire tests complementaires.
 		{
 			ft_putstr("Error.\n");
-			printf("La valeur %d figure plusieurs fois dans la liste.\n", a->value);
+			printf("push_swap l.97 A EFFACER - La valeur %d figure plusieurs fois dans la liste.\n", a->value);
 			return (NULL);
 		}
 		a = a->next;
@@ -146,12 +146,12 @@ int	main(int argc, char **argv)
 	}
 
 	ft_fill_index(a);
-	ft_print_stack(a);
+/*	ft_print_stack(a);
 	ft_print_stack(b);
-
+*/
 	count = ft_push_zero(a, b);
 	ft_print_stack(a);
-
+	
 	if (ft_check_list_and_fill_index(a))
 		printf("La liste est triee.\n");
 	printf("Nombre de coups = %d\n", count);

@@ -117,7 +117,6 @@ t_list	*ft_smallest_value(t_list **lst)
 		return (NULL);
 	smallest = t_small->value;
 	t_small->smallest_value_indicator = 1;
-	ft_print_stack(lst);
 	while (tmp)
 	{
 		tmp = tmp->next;
