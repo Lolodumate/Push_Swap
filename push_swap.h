@@ -22,6 +22,7 @@ typedef struct	s_list
 	int			value;
 	int			smallest_value_indicator;
 	int			greatest_value_indicator;
+	int			len_binary;
 	int			position;
 	int			index;
 	int			index_tmp;
@@ -39,17 +40,19 @@ int			ft_strchr(char *str, char c);
 int			ft_check_list_and_fill_index(t_list **lst);
 int			ft_convert_int(char *str, int i);
 int			ft_sort(t_list **a, t_list **b);
-int			ft_fill_index(t_list **a);
+void			ft_fill_index(t_list **a);
+int			ft_greatest_len_binary(t_list **a);
 int			ft_convert_binary(int index);
 t_list			*ft_smallest_value(t_list **lst);
 t_list			*ft_greatest_value(t_list **lst);
 t_list			*ft_pa(t_list **a, t_list **b);
+void		ft_len_binary(t_list **a);
 void		ft_print_stack(t_list **lst);
 void		ft_putstr(char *str);
 void		ft_swap(int *a, int *b);
 void		ft_sort_small_stack(t_list **a);
 void		ft_sort_big_stack(t_list **b);
-void		ft_push_zero(t_list **a, t_list **b);
+int		ft_push_zero(t_list **a, t_list **b);
 void		sa(t_list **a); // Swap les deux premiers. Test OK
 void		sb(t_list **b); // Swap les deux premiers. Test OK
 void		ss(t_list **a, t_list **b);

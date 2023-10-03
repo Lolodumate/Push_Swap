@@ -47,19 +47,17 @@ void	ft_sort_big_stack(t_list **a)
 }
 */
 
-int	ft_fill_index(t_list **a)
+void	ft_fill_index(t_list **a)
 {
 	int		i;
-	int		counter;
 	int	bits;
 	int	pos;
 	t_list	*tmp;
 
 	i = 0;
-	counter = 0;
 	pos = 0;
 	if (a == NULL)
-		return (-1);
+		return ;
 	tmp = *a;
 	pos = tmp->position;
 	while (tmp && i < pos)
@@ -70,9 +68,9 @@ int	ft_fill_index(t_list **a)
 		tmp->smallest_value_indicator = 0;
 		bits = ft_convert_binary(i);
 		tmp->binary_index = bits;
+		tmp->index_tmp = bits;
 		tmp = *a;
 	}
-	return (counter + i);
 }
 
 t_list	*ft_pa(t_list **a, t_list **b)

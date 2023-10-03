@@ -151,7 +151,7 @@ void	ft_print_stack(t_list **lst)
 	lst_name = tmp->name_stack;
 	while (tmp)
 	{
-		printf("#%d - Pile [%c] - Index [%d] - Index_Binaire %d - Smallest [%d] - Valeur [%d]\n", tmp->position, tmp->name_stack, tmp->index, tmp->binary_index, tmp->smallest_value_indicator, tmp->value);
+		printf("#%5d - Pile [%c] - Index [%5d] - I_Binaire %8d - I_tmp %8d - Valeur [%d]\n", tmp->position, tmp->name_stack, tmp->index, tmp->binary_index, tmp->index_tmp, tmp->value);
 		tmp = tmp->next;
 		if (tmp == NULL)
 			printf("Fin de la pile %c.\n\n", lst_name);

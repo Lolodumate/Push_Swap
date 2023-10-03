@@ -145,17 +145,16 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 
-	count = ft_fill_index(a);
+	ft_fill_index(a);
 	ft_print_stack(a);
 	ft_print_stack(b);
-	printf("Valeur de count = %d\n", count);
 
-	ft_pa(a, b);
+	count = ft_push_zero(a, b);
 	ft_print_stack(a);
-	ft_print_stack(b);
 
 	if (ft_check_list_and_fill_index(a))
 		printf("La liste est triee.\n");
+	printf("Nombre de coups = %d\n", count);
 
 /*	tmp = ft_smallest_value(a);
 	printf("Plus petite valeur - Position, index et valeur : #%d - Index = [%d] - Valeur = [%d]\n", tmp->position, tmp->index, tmp->value);
