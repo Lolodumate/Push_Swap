@@ -41,7 +41,7 @@ t_list	*ft_free_stack(t_list *lst)
 
 	if (lst == NULL)
 	{
-		printf("ft_stack.c l.44 A EFFACER - La pile a ete nettoyee.\n");
+//		printf("ft_stack.c l.44 A EFFACER - La pile a ete nettoyee.\n");
 		return (NULL);
 	}
 	tmp = lst->next;
@@ -63,22 +63,22 @@ t_list	*ft_check_duplicate(int value, t_list *e)
 
 void	ft_print_stack(t_list **lst)
 {
-	char	lst_name;
+//	char	lst_name;
 	t_list	*tmp;
 
-	lst_name = 0;
+//	lst_name = 0;
 	tmp = *lst;
 	if (tmp == NULL)
 	{
-		ft_putstr("\nft_stack.c l.73 A EFFACER : La pile est vide.\n\n");
+//		ft_putstr("\nft_stack.c l.73 A EFFACER : La pile est vide.\n\n");
 		return ;
 	}
-	lst_name = tmp->name_stack;
+//	lst_name = tmp->name_stack;
 	while (tmp)
 	{
 		printf("#%4d - Pile[%c] - I [%4d] - I_Bits %32d - I_tmp %32d - Small [%d] - Value [%d]\n", tmp->position, tmp->name_stack, tmp->index, tmp->binary_index, tmp->index_tmp, tmp->smallest_value_indicator, tmp->value);
 		tmp = tmp->next;
-		if (tmp == NULL)
-			printf("ft_stack.c l.82 A EFFACER : Fin de la pile %c.\n\n", lst_name);
+//		if (tmp == NULL)
+//			printf("ft_stack.c l.82 A EFFACER : Fin de la pile %c.\n\n", lst_name);
 	}
 }

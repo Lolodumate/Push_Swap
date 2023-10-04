@@ -56,15 +56,15 @@ int	ft_sort_small_stack(t_list **a, t_list **b)
 		{
 			sa(a);
 			count++;
-			ft_print_stack(a);
-			ft_print_stack(b);
+//			ft_print_stack(a);
+//			ft_print_stack(b);
 		}
 		if (ft_check_list(a) && *b == NULL)
 			return(count);
 //		printf("Valeur de a->position = %d\n", (*a)->position);
 		pb(a, b);
-		if (*a)
-			printf("Valeur de a->position = %d\n", (*a)->position);
+//		if (*a)
+//			printf("Valeur de a->position = %d\n", (*a)->position);
 		if (ft_is_greater_than(b))
 		{
 			rb(b);

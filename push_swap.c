@@ -112,12 +112,12 @@ int	main(int argc, char **argv)
 	t_list	**a;
 	t_list	**b;
 //	t_list	*tmp;
-	int	count;
+//	int	count;
 
 	a = (t_list **)malloc(sizeof(t_list));
 	b = (t_list **)malloc(sizeof(t_list));
 //	tmp = *a;
-	count = 0;
+//	count = 0;
 	if (a == NULL || b == NULL)
 		return (-1);
 	*a = NULL;
@@ -147,7 +147,7 @@ int	main(int argc, char **argv)
 		free(b);
 		return (0);
 	}
-	if (ft_lstsize(*a) <= 5)
+/*	if (ft_lstsize(*a) <= 5)
 	{
 		int	res;
 
@@ -157,17 +157,17 @@ int	main(int argc, char **argv)
 		ft_print_stack(b);
 		return (0);
 	}
-	ft_fill_index(a);
+*/	ft_fill_index(a);
 /*	ft_print_stack(a);
 	ft_print_stack(b);
 */
-	count = ft_push_zero(a, b);
-	ft_print_stack(a);
-	ft_print_stack(b);
+	/*count =*/ ft_push_zero(a, b);
+//	ft_print_stack(a);
+//	ft_print_stack(b);
 	
 //	if (ft_check_list(a))
 //		printf("La liste est triee.\n");
-	printf("Nombre de coups = %d\n", count);
+//	printf("Nombre de coups = %d\n", count);
 
 
 
@@ -181,7 +181,8 @@ int	main(int argc, char **argv)
 	ft_sort_list(b);
 	printf("Pile B apres ft_sort_list(b)\n");
 	ft_print_stack(*b);
-*/	printf("**********************************************************************************\n");
+*/	
+//	printf("**********************************************************************************\n");
 	// Test des fonctions sa, sb et ss (test OK):
 /*	printf("Avant fonction sa\n");
 	ft_print_stack(*a);
@@ -222,10 +223,10 @@ int	main(int argc, char **argv)
 	printf("Pile B :\n");
 	ft_print_stack(*b);
 */	
-	printf("Nettoyage Pile A : ");
+//	printf("Nettoyage Pile A : ");
 	ft_free_stack(*a);
 	free(a);
-	printf("Nettoyage Pile B : ");
+//	printf("Nettoyage Pile B : ");
 	ft_free_stack(*b);
 	free(b);
 	return (0);
