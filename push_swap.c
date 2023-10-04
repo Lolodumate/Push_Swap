@@ -135,7 +135,7 @@ int	main(int argc, char **argv)
 	}
 	if (push_swap(*a))
 		ft_print_stack(a);
-	if (ft_check_list_and_fill_index(a))
+	if (ft_check_list(a))
 	{
 		printf("La liste est triee.\n");
 		ft_free_stack(*a);
@@ -144,7 +144,16 @@ int	main(int argc, char **argv)
 		free(b);
 		return (0);
 	}
+	if (ft_lstsize(*a) <= 5)
+	{
+		int	res;
 
+		res = ft_sort_small_stack(a, b);
+		printf("Petite liste - Resultat = %d\n", res);
+		ft_print_stack(a);
+		ft_print_stack(b);
+		return (0);
+	}
 	ft_fill_index(a);
 /*	ft_print_stack(a);
 	ft_print_stack(b);
@@ -152,7 +161,7 @@ int	main(int argc, char **argv)
 	count = ft_push_zero(a, b);
 	ft_print_stack(a);
 	
-	if (ft_check_list_and_fill_index(a))
+	if (ft_check_list(a))
 		printf("La liste est triee.\n");
 	printf("Nombre de coups = %d\n", count);
 

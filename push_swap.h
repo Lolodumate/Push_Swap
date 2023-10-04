@@ -38,7 +38,7 @@ int			ft_isdigit(char c);
 int			ft_is_greater_than(t_list **lst);
 int			ft_atoi(char *str);
 int			ft_strchr(char *str, char c);
-int			ft_check_list_and_fill_index(t_list **lst);
+int			ft_check_list(t_list **lst);
 int			ft_convert_int(char *str, int i);
 int			ft_sort(t_list **a, t_list **b);
 void			ft_fill_index(t_list **a);
@@ -52,7 +52,7 @@ void		ft_len_binary(t_list **a);
 void		ft_print_stack(t_list **lst);
 void		ft_putstr(char *str);
 int		ft_do_swap(t_list **a, t_list **b);
-void		ft_sort_small_stack(t_list **a);
+int		ft_sort_small_stack(t_list **a, t_list **b);
 void		ft_sort_big_stack(t_list **b);
 int		ft_push_zero(t_list **a, t_list **b); // ft_radix.c - Trop de lignes.
 void		sa(t_list **a); // Swap les deux premiers. Test OK

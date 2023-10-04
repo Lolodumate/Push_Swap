@@ -76,7 +76,7 @@ void	ft_print_stack(t_list **lst)
 	lst_name = tmp->name_stack;
 	while (tmp)
 	{
-		printf("#%5d - Pile [%c] - Index [%5d] - I_Binaire %8d - I_tmp %8d - Valeur [%d]\n", tmp->position, tmp->name_stack, tmp->index, tmp->binary_index, tmp->index_tmp, tmp->value);
+		printf("#%4d - Pile[%c] - I [%4d] - I_Bits %8d - I_tmp %8d - Small [%d] - Value [%d]\n", tmp->position, tmp->name_stack, tmp->index, tmp->binary_index, tmp->index_tmp, tmp->smallest_value_indicator, tmp->value);
 		tmp = tmp->next;
 		if (tmp == NULL)
 			printf("ft_stack.c l.82 A EFFACER : Fin de la pile %c.\n\n", lst_name);

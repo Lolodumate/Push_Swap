@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	ft_check_list_and_fill_index(t_list **lst)
+int	ft_check_list(t_list **lst)
 {
 	t_list		*tmp;
 	int	i;
@@ -33,12 +33,84 @@ int	ft_check_list_and_fill_index(t_list **lst)
 	return (i);
 }
 
-/*
-void	ft_sort_small_stack(t_list **a)
-{
+// Liste inferieure ou egale a 5 nombres 
 
-}
+int	ft_sort_small_stack(t_list **a, t_list **b)
+{
+	int		count;
+//	int		i;
+
+	count = 0;
+//	i = 0;
+	if (a == NULL || *a == NULL)
+		return (-1);
+	ft_check_list(a);
+//	ft_smallest_value(a);
+//	ft_print_stack(a);
+	ft_fill_index(a);
+	ft_print_stack(a);
+	while (!ft_check_list(a) || ft_lstsize(*a) == 1)
+	{
+//		ft_smallest_value(a);
+		if (ft_is_greater_than(a))
+		{
+			sa(a);
+			count++;
+			ft_print_stack(a);
+			ft_print_stack(b);
+		}
+		if (ft_check_list(a) && *b == NULL)
+			return(count);
+		printf("Valeur de a->position = %d\n", (*a)->position);
+		pb(a, b);
+		if (*a)
+			printf("Valeur de a->position = %d\n", (*a)->position);
+		if (ft_is_greater_than(b))
+		{
+			rb(b);
+			count++;
+		}
+		if (*a)
+			printf("Valeur de a->position = %d\n", (*a)->position);
+		if (*b)
+			printf("Valeur de b->position = %d\n", (*b)->position);
+		count++;
+		ft_print_stack(a);
+		ft_print_stack(b);
+/*		if (ft_lstsize(*b) == 3)
+			while (i < 3)
+			{
+				pa(a, b);
+				count++;
+				ft_print_stack(a);
+				ft_print_stack(b);
+				ra(a);
+				count++;
+				ft_print_stack(a);
+				ft_print_stack(b);
+				i++;
+			}
+		if (ft_check_list(a))
+			return (count);
+		i = 0;*/
+/*		if (ft_check_list(a)
+			return (count);
+
+		while (*b)
+		{
+			pa(a, b);
+			ra(a);
+			count++;
+			ft_print_stack(a);
+			ft_print_stack(b);
+		}
 */
+//		break ;
+	}
+	if (!ft_check_list(a))
+		return (-1);
+	return (count);
+}
 
 /*
 void	ft_sort_big_stack(t_list **a)
@@ -100,18 +172,23 @@ t_list	*ft_smallest_value(t_list **lst)
 		i++;
 		if (t_small->next)
 			t_small = t_small->next;
-		else
+/*		else
 		{
 			t_small->smallest_value_indicator = 1;
 			break ;
 		}
 	}
-	if (i == tmp->position)
-	{
-		t_small->index = tmp->position;
-		t_small->smallest_value_indicator = 1;
-		t_small = t_small->next;
-		return (t_small);
+*/
+		if (t_small->index == 1)
+			t_small->smallest_value_indicator = 1;
+		if (i == tmp->position)
+		{
+			t_small->index = tmp->position;
+			t_small->smallest_value_indicator = 1;
+			t_small = t_small->next;
+			printf("OOOOOOOOOOOOOOOOO\n");
+			return (t_small);
+		}
 	}
 	if (t_small == NULL)
 		return (NULL);
