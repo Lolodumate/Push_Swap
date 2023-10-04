@@ -86,23 +86,23 @@ int	ft_convert_binary(int index)
 	int		i;
 	int		j;
 	int		bits_int;
-	char	bits[8];
+	char	bits[64];
 	char	*res;
 
 	i = 0;
 	j = 0;
 	bits_int = 0;
-	res = malloc(sizeof(char) * 8 + 1);
+	res = malloc(sizeof(char) * 64 + 1);
 	if (res == NULL)
 		return (-1);
-	res[8] = '\0';
-	while (i < 8)
+	res[64] = '\0';
+	while (i < 64)
 	{
 		bits[i] = (index % 2) + '0';
 		index /= 2;
 		i++;
 	}
-	i = 7;
+	i = 63;
 	while (i >= 0)
 	{
 		res[j] = bits[i];

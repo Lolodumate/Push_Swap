@@ -72,10 +72,10 @@ int	ft_push_zero(t_list **a, t_list **b)
 	while (greatest_binary > 0)
 	{
 		pos = (*a)->position;
-		while (*a && pos-- > 0) // tmp_a == *a
+		while (*a && pos-- > 0)
 		{
-			tmp = (*a)->index_tmp % 2; // (*a)->index_tmp % 2
-			(*a)->index_tmp /= 10; // (*a)->index_tmp /= 10
+			tmp = (*a)->index_tmp % 2;
+			(*a)->index_tmp /= 10;
 			if (tmp == 0)
 				pb(a, b);
 			else

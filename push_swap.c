@@ -13,6 +13,9 @@
 #include "push_swap.h"
 #include <stdio.h>
 
+/*
+ * Visualiser : https://github.com/elijahkash/push_swap_gui
+ */
 int	ft_argv_compliant(char *str)
 {
 	int	i;
@@ -27,10 +30,10 @@ int	ft_argv_compliant(char *str)
 	}
 	if (str[i] == '\0')
 	{
-		ft_putstr("push_swap.c l.30 A EFFACER - Le format de la liste est conforme.\n");
+//		ft_putstr("push_swap.c l.30 A EFFACER - Le format de la liste est conforme.\n");
 		return (1);
 	}
-	ft_putstr("push_swap.c l.33 A EFFACER - Error : le format de la liste n'est pas conforme.\n");
+//	ft_putstr("push_swap.c l.33 A EFFACER - Error : le format de la liste n'est pas conforme.\n");
 	return (0);
 }
 
@@ -94,7 +97,7 @@ t_list	*push_swap(t_list *a)
 		if (ft_check_duplicate(a->value, a) != NULL) // Fonction a priori OK. Faire tests complementaires.
 		{
 			ft_putstr("Error.\n");
-			printf("push_swap l.97 A EFFACER - La valeur %d figure plusieurs fois dans la liste.\n", a->value);
+//			printf("push_swap l.97 A EFFACER - La valeur %d figure plusieurs fois dans la liste.\n", a->value);
 			return (NULL);
 		}
 		a = a->next;
@@ -124,7 +127,7 @@ int	main(int argc, char **argv)
 			return (-1);
 	if (argc != 2)
 	{
-		ft_putstr("Error : le nombre d'argument doit etre de 1.\n");
+//		ft_putstr("Error : le nombre d'argument doit etre de 1.\n");
 		return (0);
 	}
 	*a = ft_convert_argv(*a, argv[1]);
@@ -133,11 +136,11 @@ int	main(int argc, char **argv)
 		free(a);
 		free(b);	
 	}
-	if (push_swap(*a))
-		ft_print_stack(a);
+//	if (push_swap(*a))
+//		ft_print_stack(a);
 	if (ft_check_list(a))
 	{
-		printf("La liste est triee.\n");
+//		printf("La liste est triee.\n");
 		ft_free_stack(*a);
 		free(a);
 		ft_free_stack(*b);
@@ -160,10 +163,13 @@ int	main(int argc, char **argv)
 */
 	count = ft_push_zero(a, b);
 	ft_print_stack(a);
+	ft_print_stack(b);
 	
-	if (ft_check_list(a))
-		printf("La liste est triee.\n");
+//	if (ft_check_list(a))
+//		printf("La liste est triee.\n");
 	printf("Nombre de coups = %d\n", count);
+
+
 
 /*	tmp = ft_smallest_value(a);
 	printf("Plus petite valeur - Position, index et valeur : #%d - Index = [%d] - Valeur = [%d]\n", tmp->position, tmp->index, tmp->value);
