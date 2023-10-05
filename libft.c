@@ -12,6 +12,29 @@
 
 #include "push_swap.h"
 
+int	ft_strchr(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	ft_isdigit(char c)
+{
+	if (!c)
+		return (0);
+	if (ft_strchr("0123456789+-", c))
+		return (1);
+	return (0);
+}
+
 t_list	*ft_lstlast(t_list *lst)
 {
 	t_list	*tmp;
@@ -43,7 +66,7 @@ int	ft_atoi(char *str)
 {
 	int	i;
 	int	sign;
-	long	res;
+	long long	res;
 
 	i = 0;
 	sign = 1;

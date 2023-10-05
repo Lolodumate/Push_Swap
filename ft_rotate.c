@@ -37,7 +37,7 @@ void	ra(t_list **a)
 			tmp = tmp->next;
 			tmp->position++;
 		}
-		ft_putstr("ra\n");
+		write(1, "ra\n", 3);
 	}
 }
 
@@ -66,7 +66,7 @@ void	rb(t_list **b)
 			tmp = tmp->next;
 			tmp->position++;
 		}
-		ft_putstr("rb\n");
+		write(1, "rb\n", 3);
 	}
 }
 
@@ -74,5 +74,5 @@ void	rr(t_list **a, t_list **b)
 {
 	ra(a);
 	rb(b);
-	ft_putstr("rr\n");
+	write(1, "rr\n", 3);
 }

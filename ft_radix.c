@@ -54,7 +54,7 @@ int	ft_greatest_len_binary(t_list **a)
 	return (greatest);
 }
 
-int	ft_push_zero(t_list **a, t_list **b)
+int	ft_push_bits_zero_to_b(t_list **a, t_list **b)
 {
 	int		greatest_binary;
 	int		tmp;

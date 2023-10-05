@@ -36,7 +36,7 @@ void	sa(t_list **a)
 		tmp->value = tmp_value;
 		tmp->position = tmp_position - 1;
 		tmp->index = tmp_index;
-		ft_putstr("sa\n");
+		write(1, "sa\n", 3);
 	}
 }
 
@@ -64,7 +64,7 @@ void	sb(t_list **b)
 		tmp->value = tmp_value;
 		tmp->position = tmp_position - 1;
 		tmp->index = tmp_index;
-		ft_putstr("sb\n");
+		write(1, "sb\n", 3);
 	}
 }
 
@@ -72,7 +72,7 @@ void	ss(t_list **a, t_list **b)
 {
 	sa(a);
 	sb(b);
-	ft_putstr("ss\n");
+	write(1, "ss\n", 3);
 }
 /*
 int	ft_do_swap(t_list **a, t_list **b)

@@ -29,63 +29,37 @@ int	ft_argv_compliant(char *str)
 		i++;
 	}
 	if (str[i] == '\0')
-	{
-//		ft_putstr("push_swap.c l.30 A EFFACER - Le format de la liste est conforme.\n");
 		return (1);
-	}
-//	ft_putstr("push_swap.c l.33 A EFFACER - Error : le format de la liste n'est pas conforme.\n");
 	return (0);
 }
 
-t_list	*ft_convert_argv(t_list *e, char *str)
+t_list	*ft_convert_argv(t_list **a, char *str)
 {
-	int			i;
-	int			j;
-	int			len;
 	int			position;
+	int			i;
+	int			len;
 	char		*value;
 
-	i = 0;
 	position = 0;
-	if (str == NULL)
-		return (NULL);
-	while (str[i])
-		i++;
-	i--;
-	while (str[i] && i >= 0)
+	i = ft_place_index(str, 0);
+	while (i >= 0)
 	{
 		len = 0;
-		j = 0;
-		while (str[i] && !ft_isdigit(str[i]))
-			i--;
-		while (str[i] && ft_isdigit(str[i]) && i >= 0)
-		{
-			len++;
-			i--;
-		}
-		i++;
+		len = ft_len_number(str, i);
 		value = malloc(sizeof(char) * len + 1);
 		if (value == NULL)
 			return (NULL);
-		while (ft_isdigit(str[i + j]) && j < len)
-		{
-			value[j] = str[i + j];
-			j++;
-		}
-		value[j] = '\0';
+		value = ft_fill_value(str, value, i, len);
 		position++;
-		if (value[0] != '\0')
-		{
-			e = ft_add_node(e, ft_atoi(value), position);
-			e->name_stack = 'A';
-		}
-		free(value);
-		i--;
+		*a = ft_create_node(a, value, position);
+		if (!ft_limits((*a)->value))
+			return (NULL);
+		i -= (len + 1);
 	}
-	return (e);
+	return (*a);
 }
 
-t_list	*push_swap(t_list *a)
+t_list	*ft_duplicate(t_list *a)
 {
 	t_list	*tmp;
 
@@ -94,15 +68,12 @@ t_list	*push_swap(t_list *a)
 		return (NULL);
 	while (a)
 	{
-		if (ft_check_duplicate(a->value, a) != NULL) // Fonction a priori OK. Faire tests complementaires.
+		if (ft_check_duplicate(a->value, a) != NULL)
 		{
-			ft_putstr("Error.\n");
-//			printf("push_swap l.97 A EFFACER - La valeur %d figure plusieurs fois dans la liste.\n", a->value);
+//			printf("Erreur ft_check_duplicate = NULL\n");
 			return (NULL);
 		}
 		a = a->next;
-		// Ajouter une verification sur les limites d'entiers INT_MIN et INT_MAX.
-		// Ajouter une verification sur l'ordre des entiers. S'ils sont deja ordonnes, alors fin du programme.
 	}
 	return (tmp);
 }
@@ -112,42 +83,43 @@ int	main(int argc, char **argv)
 	t_list	**a;
 	t_list	**b;
 //	t_list	*tmp;
-//	int	count;
+	int	count;
 
 	a = (t_list **)malloc(sizeof(t_list));
 	b = (t_list **)malloc(sizeof(t_list));
 //	tmp = *a;
-//	count = 0;
+	count = 0;
 	if (a == NULL || b == NULL)
 		return (-1);
 	*a = NULL;
 	*b = NULL;
-	if (argc == 2)
-		if (!ft_argv_compliant(argv[1])) // Fonction a corriger : retour incorrect sur les doubles signes --, ++, -+, etc...
-			return (-1);
 	if (argc != 2)
-	{
-//		ft_putstr("Error : le nombre d'argument doit etre de 1.\n");
-		return (0);
-	}
-	*a = ft_convert_argv(*a, argv[1]);
+		ft_exit(a, b);
+	if (!ft_argv_compliant(argv[1])) // Verifier controles sur les --, ++, etc
+		ft_exit(a, b);
+	*a = ft_convert_argv(a, argv[1]);
 	if (*a == NULL)
 	{
-		free(a);
-		free(b);	
-	}
-//	if (push_swap(*a))
-//		ft_print_stack(a);
-	if (ft_check_list(a))
-	{
-//		printf("La liste est triee.\n");
-		ft_free_stack(*a);
-		free(a);
-		ft_free_stack(*b);
-		free(b);
+		ft_free(a, b);
 		return (0);
 	}
-/*	if (ft_lstsize(*a) <= 5)
+	if (!ft_duplicate(*a)) // Tester liste avec doublons (+valgrind)
+		ft_exit(a, b);
+	if (ft_check_list(a))
+	{
+		ft_free(a, b);
+		return (0);
+	}
+	if (ft_lstsize(*a) > 5) // Finaliser ft_sort_small_stack
+	{
+		ft_fill_index(a);
+		count = ft_push_bits_zero_to_b(a, b);
+		printf("Nombre de coups = %d\n", count);
+		ft_print_stack(a);
+		ft_print_stack(b);
+	}
+
+/*	else
 	{
 		int	res;
 
@@ -157,11 +129,10 @@ int	main(int argc, char **argv)
 		ft_print_stack(b);
 		return (0);
 	}
-*/	ft_fill_index(a);
+*/	
 /*	ft_print_stack(a);
 	ft_print_stack(b);
 */
-	/*count =*/ ft_push_zero(a, b);
 //	ft_print_stack(a);
 //	ft_print_stack(b);
 	
@@ -223,11 +194,6 @@ int	main(int argc, char **argv)
 	printf("Pile B :\n");
 	ft_print_stack(*b);
 */	
-//	printf("Nettoyage Pile A : ");
-	ft_free_stack(*a);
-	free(a);
-//	printf("Nettoyage Pile B : ");
-	ft_free_stack(*b);
-	free(b);
+	ft_free(a, b);
 	return (0);
 }

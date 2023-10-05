@@ -12,39 +12,19 @@
 
 #include "push_swap.h"
 
-void	ft_putstr(char *str)
+void	ft_exit(t_list **a, t_list **b)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
+	ft_free(a, b);
+	write(2, "Error\n", 6);
+	exit(1);
 }
 
-int	ft_strchr(char *str, char c)
+void	ft_free(t_list **a, t_list **b)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	ft_isdigit(char c)
-{
-	if (!c)
-		return (0);
-	if (ft_strchr("0123456789+-",c))
-		return (1);
-	return (0);
+	ft_free_stack(*a);
+	ft_free_stack(*b);
+	free(a);
+	free(b);
 }
 
 char	*ft_strcpy(char *str1, char *str2, int j)

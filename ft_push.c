@@ -34,7 +34,7 @@ void	pa(t_list **a, t_list **b) // Deplace le premier element de b sur la pile a
 	stack_b->name_stack = 'A';
 	*a = stack_b;
 	*b = tmp_b;
-	ft_putstr("pa\n");
+	write(1,"pa\n", 3);
 }
 
 void	pb(t_list **a, t_list **b) // Deplace le premier element de a sur la pile b
@@ -58,5 +58,5 @@ void	pb(t_list **a, t_list **b) // Deplace le premier element de a sur la pile b
 	stack_a->name_stack = 'B';
 	*b = stack_a;
 	*a = tmp_a;
-	ft_putstr("pb\n");
+	write(1, "pb\n", 3);
 }
