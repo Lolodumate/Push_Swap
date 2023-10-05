@@ -1,6 +1,7 @@
 #include "push_swap.h"
 
 // Fonction de placement de l'index a la fin de str pour ft_convert_argv
+/*
 int	ft_place_index(char *str, int i)
 {
 	while (str[i])
@@ -9,7 +10,7 @@ int	ft_place_index(char *str, int i)
 		i--;
 	return (i);
 }
-
+*/
 // Fonction de calcul de longueur pour ft_convert_argv
 int	ft_len_number(char *str, int i)
 {
@@ -40,6 +41,9 @@ char	*ft_fill_value(char *str, char *value, int i, int len)
 		i--;
 		len--;
 	}
+//	printf("Valeur de ft_limits(ft_atoi(value)) = %d\n - Value = %s\n", ft_limits(ft_atoi(value)), value);
+	if (ft_limits(ft_atoi(value)) == 0)
+		return (NULL);
 	return (value);
 }
 
@@ -49,7 +53,7 @@ t_list	*ft_create_node(t_list **a, char *value, int position)
 		return (NULL);
 	if (value[0] != '\0')
 	{
-		*a = ft_add_node(*a, ft_atoi(value), position);
+		*a = ft_add_node(*a, (int)ft_atoi(value), position);
 		(*a)->name_stack = 'A';
 	}
 	free(value);
@@ -57,9 +61,9 @@ t_list	*ft_create_node(t_list **a, char *value, int position)
 }
 
 // Fonction de verification des limites d'entiers pour ft_convert_argv
-int	ft_limits(int value)
+int	ft_limits(long long value)
 {
-	if (value >= INT_MIN && value <= INT_MAX)
+	if (value >= -2147483648 && value <= 2147483647)
 		return (1);
 	return (0);
 }

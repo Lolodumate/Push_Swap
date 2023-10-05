@@ -38,13 +38,14 @@ char				*ft_fill_value(char *str, char *value, int i, int len);
 int			ft_argv_compliant(char *str);
 int			ft_isdigit(char c);
 int			ft_is_greater_than(t_list **lst);
-int			ft_limits(int value);
-int			ft_place_index(char *str, int i);
+int			ft_limits(long long value);
+//int			ft_place_index(char *str, int i);
 int			ft_atoi(char *str);
 int			ft_strchr(char *str, char c);
 int			ft_check_list(t_list **lst);
 int			ft_convert_int(char *str, int i);
 int			ft_sort(t_list **a, t_list **b);
+int			ft_strlen(char *str);
 void			ft_fill_index(t_list **a);
 int			ft_greatest_len_binary(t_list **a);
 int			ft_convert_binary(int index); // utils.c - Trop de lignes.

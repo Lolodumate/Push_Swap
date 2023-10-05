@@ -41,19 +41,26 @@ t_list	*ft_convert_argv(t_list **a, char *str)
 	char		*value;
 
 	position = 0;
-	i = ft_place_index(str, 0);
+	i = ft_strlen(str);;
 	while (i >= 0)
 	{
+		while (!ft_isdigit(str[i]))
+			i--;
 		len = 0;
 		len = ft_len_number(str, i);
 		value = malloc(sizeof(char) * len + 1);
 		if (value == NULL)
 			return (NULL);
-		value = ft_fill_value(str, value, i, len);
+		value = ft_fill_value(str, value, i, len); // Reprendre le ft_atoi long long de la piscine
+		if (value == NULL)
+		{
+			printf("Value = NULL\n");
+			free(value);
+			return (NULL);
+		}
 		position++;
 		*a = ft_create_node(a, value, position);
-		if (!ft_limits((*a)->value))
-			return (NULL);
+//		printf("Valeur de (*a)->value = %d\n", (*a)->value);
 		i -= (len + 1);
 	}
 	return (*a);
@@ -100,6 +107,7 @@ int	main(int argc, char **argv)
 	*a = ft_convert_argv(a, argv[1]);
 	if (*a == NULL)
 	{
+		printf("Value = NULL\n");
 		ft_free(a, b);
 		return (0);
 	}
