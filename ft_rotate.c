@@ -22,7 +22,7 @@ void	ra(t_list **a)
 	tmp = *a;
 	new_top = top->next;
 	top->position = 1;
-	if (a)
+	if (ft_lstsize(*a) >= 2)
 	{
 		while (tmp)
 		{
@@ -51,7 +51,7 @@ void	rb(t_list **b)
 	tmp = *b;
 	new_top = top->next;
 	top->position = 1;
-	if (b)
+	if (ft_lstsize(*b) >= 2)
 	{
 		while (tmp)
 		{

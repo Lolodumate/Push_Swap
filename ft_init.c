@@ -14,14 +14,15 @@ int	ft_place_index(char *str, int i)
 // Fonction de calcul de longueur pour ft_convert_argv
 int	ft_len_number(char *str, int i)
 {
-	size_t	len;
+	int	len;
 
 	len = 0;
 	if (!str)
 		return (0);
-	while (!ft_isdigit(str[i]))
+	while (str[i] && !ft_isdigit(str[i]))
 		i--;
-	while (ft_isdigit(str[i]))
+//	printf("Valeur de str[i] dans ft_len_number apres while 1 - str[%d] = %c\n", i, str[i]);
+	while (i >= 0 && str[i] && ft_isdigit(str[i]))
 	{
 		len++;
 		i--;
@@ -34,16 +35,15 @@ char	*ft_fill_value(char *str, char *value, int i, int len)
 {
 	if (!str || !value || len == 0)
 		return (NULL);
-	value[len] = '\0';
-	while (len - 1 >= 0)
+	len--;
+	printf("i = %d - len = %d\n", i, len);
+	while (len >= 0 && i >= 0)
 	{
-		value[len - 1] = str[i];
+		value[len] = str[i];
+		printf("value[%d] = %c - str[%d] = %c\n", len, value[len], i, str[i]);
 		i--;
 		len--;
 	}
-//	printf("Valeur de ft_limits(ft_atoi(value)) = %d\n - Value = %s\n", ft_limits(ft_atoi(value)), value);
-	if (ft_limits(ft_atoi(value)) == 0)
-		return (NULL);
 	return (value);
 }
 
@@ -51,11 +51,8 @@ t_list	*ft_create_node(t_list **a, char *value, int position)
 {
 	if (!a || !value)
 		return (NULL);
-	if (value[0] != '\0')
-	{
-		*a = ft_add_node(*a, (int)ft_atoi(value), position);
-		(*a)->name_stack = 'A';
-	}
+	*a = ft_add_node(*a, (int)ft_atoi(value), position);
+	(*a)->name_stack = 'A';
 	free(value);
 	return (*a);
 }

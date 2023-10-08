@@ -60,14 +60,14 @@ int	ft_push_bits_zero_to_b(t_list **a, t_list **b)
 	int		tmp;
 	int		pos;
 	int		count;
-	t_list	*tmp_a;
+//	int		i;
 
 	if (a == NULL)
 		return (-1);
 	tmp = 0;
 	count = 0;
-	tmp_a = *a;
-	pos = tmp_a->position;
+	pos = (*a)->position;
+//	i = (*a)->position;
 	greatest_binary = ft_greatest_len_binary(a);
 	while (greatest_binary > 0)
 	{
@@ -76,19 +76,92 @@ int	ft_push_bits_zero_to_b(t_list **a, t_list **b)
 		{
 			tmp = (*a)->index_tmp % 2;
 			(*a)->index_tmp /= 10;
-			if (tmp == 0)
+			// Cette section permet d'identifer le plus grand nombre et de le placer en bas de la pile B pour le mettre en attente. Ainsi, Radix aura moins de traitements à faire.
+			// Elle permet de diminier le nombre de coups de quelques dizaines sur une liste de 100 nombres.
+/*			if ((*a)->index == i)
+			{
+				(*a)->lock = 1;
+				pb(a, b);
+				count++;
+				rb(b);
+				i--;
+			}
+			else*/ if (tmp == 0)
 				pb(a, b);
 			else
 				ra(a);
 			count++;
-			tmp_a = *a;
 		}
-		while (*b)
+		ft_print_stack(a);
+		ft_print_stack(b);
+		while (*b/* && (*b)->lock != 1*/)
 		{
 			pa(a, b);
 			count++;
 		}
 		greatest_binary--;
+		if (greatest_binary == 0)
+		{
+			if (*b)
+				pos = (*b)->position;
+			while (*b)
+			{
+				pa(a, b);
+				count++;
+			}
+/*			while (pos-- > 0)
+			{
+				ra(a);
+				count++;
+			}
+*/		}
 	}
 	return (count);
 }
+
+// Fonction a revoir : le but est de placer les plus grandes valeurs dans la moitie haute de la pile A.
+
+/*
+int	ft_presort(t_list **a, t_list **b)
+{
+	int		pos;
+	int		median;
+	int		count;
+
+	pos = (*a)->position;
+	median = pos / 2;
+	count = 0;
+	printf("Valeur de median = %d\n", median);
+	while (pos-- > 0)
+	{
+		
+		if ((*a)->index < median)
+			ra(a);
+		else
+		{
+			pb(a, b);
+			if ((*b)->index == greatest_index)
+			{
+				(*b)->lock = 1;
+				rb(b);
+				count++;
+				greatest_index--;
+			}
+		}
+		count++;
+		
+		printf("Valeur de pos = %d\n", pos);
+		printf("Valeur de tmp->index = %d\n", (*a)->index);
+	//	ft_print_stack(b);
+	}
+	while (*b && (*b)->lock != 1)
+	{
+		pa(a, b);
+		count++;
+	}
+	printf("Affichage piles après ft_presort\n");
+	ft_print_stack(a);
+	ft_print_stack(b);
+	return (count);
+}
+*/

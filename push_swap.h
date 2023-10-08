@@ -29,13 +29,18 @@ typedef struct	s_list
 	int			index_tmp;
 	int			count;
 	int			binary_index;
+	int			lock;
 	char		name_stack;
 	struct	s_list	*next;
 }		t_list;
 
+char				*ft_create_str(char **argv, int len);
+char				*ft_create_strjoin(char **argv, char *str);
 char				*ft_strcpy(char *str1, char *str2, int j);
 char				*ft_fill_value(char *str, char *value, int i, int len);
-int			ft_argv_compliant(char *str);
+char				*ft_strjoin(char *s1, char *s2);
+int			ft_argv_compliant(char **argv);
+int			ft_len_argv(char **argv);
 int			ft_isdigit(char c);
 int			ft_is_greater_than(t_list **lst);
 int			ft_limits(long long value);
@@ -45,17 +50,17 @@ int			ft_strchr(char *str, char c);
 int			ft_check_list(t_list **lst);
 int			ft_convert_int(char *str, int i);
 int			ft_sort(t_list **a, t_list **b);
-int			ft_strlen(char *str);
+int			ft_strlen(const char *str);
 void			ft_fill_index(t_list **a);
 int			ft_greatest_len_binary(t_list **a);
 int			ft_convert_binary(int index); // utils.c - Trop de lignes.
 t_list			*ft_smallest_value(t_list **lst); // ft_sort.c - Trop de lignes.
 t_list			*ft_greatest_value(t_list **lst);
-t_list			*ft_pa(t_list **a, t_list **b);
 //void		ft_swap(t_list **lst);
 void		ft_exit(t_list **a, t_list **b);
 void		ft_free(t_list **a, t_list **b);
 void		ft_len_binary(t_list **a);
+int		ft_presort(t_list **a, t_list **b);
 void		ft_print_stack(t_list **lst);
 void		ft_putstr(char *str);
 int		ft_do_swap(t_list **a, t_list **b);
@@ -63,6 +68,8 @@ int		ft_sort_small_stack(t_list **a, t_list **b);
 void		ft_sort_big_stack(t_list **b);
 int		ft_push_bits_zero_to_b(t_list **a, t_list **b); // ft_radix.c - Trop de lignes.
 int		ft_len_number(char *str, int i);
+void		*ft_calloc(size_t nmemb, size_t size);
+void		*ft_memset(void *s, int c, size_t n);
 void		sa(t_list **a); // Swap les deux premiers. Test OK
 void		sb(t_list **b); // Swap les deux premiers. Test OK
 void		ss(t_list **a, t_list **b);

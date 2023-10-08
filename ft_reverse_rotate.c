@@ -21,7 +21,7 @@ void	rra(t_list **a)
 	top = *a;
 	tmp = ft_lstlast(*a);
 	pos = 0;
-	if (a)
+	if (*a)
 	{
 		pos = top->position;
 		tmp->position = pos;
@@ -37,7 +37,7 @@ void	rra(t_list **a)
 				tmp->position = pos;
 		}
 		*a = top;
-		write(1, "rra\n", 3);
+		write(1, "rra\n", 4);
 	}
 }
 
@@ -49,19 +49,24 @@ void	rrb(t_list **b)
 
 	top = *b;
 	tmp = ft_lstlast(*b);
-	pos = top->position;
-	if (b)
+	pos = 0;
+	if (*b)
 	{
+		pos = top->position;
 		tmp->position = pos;
 		tmp->next = top;
-		while (tmp && tmp->position > 0)
+		top = tmp;
+		while (tmp)
 		{
-			tmp = tmp->next;
-			tmp->position--;
 			if (tmp->position == 1)
 				tmp->next = NULL;
+			tmp = tmp->next;
+			pos--;
+			if (tmp)
+				tmp->position = pos;
 		}
-		write(1, "rra\n", 3);
+		*b = top;
+		write(1, "rrb\n", 4);
 	}
 }
 

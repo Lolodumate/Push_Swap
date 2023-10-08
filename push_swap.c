@@ -16,21 +16,114 @@
 /*
  * Visualiser : https://github.com/elijahkash/push_swap_gui
  */
-int	ft_argv_compliant(char *str)
+int	ft_argv_compliant(char **argv)
 {
 	int	i;
+	int	j;
+	int	len;
 
 	i = 0;
-	while (ft_isdigit(str[i]) || str[i] == ' ')
+	j = 1;
+	len = 0;
+	while (argv[j])
 	{
-		if (str[i] == '-' || str[i] == '+')
-			if (!str[i + 1] || str[i + 1] == '-' || str[i + 1] == '+' || str[i + 1] == ' ')
-				return (0);
-		i++;
+		while (ft_isdigit(argv[j][i]) || argv[j][i] == ' ')
+		{
+			if (argv[j][i] == '-' || argv[j][i] == '+')
+				if (!argv[j][i + 1] || argv[j][i + 1] == '-' || argv[j][i + 1] == '+' || argv[j][i + 1] == ' ')
+					return (0);
+			i++;
+			len ++;
+		}
+		if (argv[j][i] == '\0')
+		{
+			j++;
+			i = 0;
+		}
+		else
+			return (0);
 	}
-	if (str[i] == '\0')
-		return (1);
-	return (0);
+	return (len);
+}
+
+int	ft_len_argv(char **argv)
+{
+	int	i;
+	int	j;
+	int	len;
+
+	i = 0;
+	j = 1;
+	len = 0;
+	while (argv[j])
+	{
+		while (argv[j][i])
+		{
+			len++;
+			i++;
+		}
+		i = 0;
+		j++;
+		if (argv[j])
+			len++;
+	}
+	return (len);
+}
+
+// Test OK avec un seul argument entre guillemets
+// Test OK avec plusieurs arguments sans les guillemets et separes par UN SEUL espace
+// Test KO avec plusieurs arguments sans les guillemets et separes par plusieurs espaces
+// Solution : s'il y a plusieurs espaces à la suite dans les arguments, alors il faut les remplacer par un seul espace dans la chaîne de caracteres finale (str)
+char	*ft_create_str(char **argv, int len) 
+{
+	int		i;
+	int		j;
+	int		k;
+	char	*str;
+
+	i = 0;
+	j = 1;
+	k = 0;
+	str = ft_calloc(sizeof(char), len + 1);
+	if (str == NULL)
+		return (NULL);
+	str[len] = '\0';
+	printf("Valeur de str[len] -> str[%d] = %c\n", len, str[len]);
+	while (argv[j])
+	{
+		printf("argv[j] = %s\n", argv[j]);
+		while (argv[j][i])
+		{
+			str[k] = argv[j][i];
+			printf("str[k] -> str[%d] = %c\n", k, str[k]);
+			k++;		
+			i++;
+		}
+		i = 0;
+		j++;
+//		printf("argv[j] = %s\n", argv[j]);
+		if (argv[j])
+		{
+			k++;
+			str[k] = ' ';
+			printf("str[k] -> str[%d] = %cSPACE\n", k, str[k]);
+		}
+	}
+	printf("Valeur de retour str dans ft_create_str = %s\n", str);
+	return (str);
+}
+
+char	*ft_create_strjoin(char **argv, char *str)
+{
+	int		j;
+
+	j = 0;
+	while (argv[j])
+	{
+		str = ft_strjoin(str, argv[j]);
+		j++;
+	}
+	return (str);
 }
 
 t_list	*ft_convert_argv(t_list **a, char *str)
@@ -41,17 +134,16 @@ t_list	*ft_convert_argv(t_list **a, char *str)
 	char		*value;
 
 	position = 0;
-	i = ft_strlen(str);;
+	i = ft_strlen(str) - 1;
 	while (i >= 0)
 	{
-		while (!ft_isdigit(str[i]))
+		while (str[i] && !ft_isdigit(str[i]))
 			i--;
-		len = 0;
 		len = ft_len_number(str, i);
-		value = malloc(sizeof(char) * len + 1);
+		value = ft_calloc(sizeof(char), len + 1);
 		if (value == NULL)
 			return (NULL);
-		value = ft_fill_value(str, value, i, len); // Reprendre le ft_atoi long long de la piscine
+		value = ft_fill_value(str, value, i, len);
 		if (value == NULL)
 		{
 			printf("Value = NULL\n");
@@ -60,7 +152,6 @@ t_list	*ft_convert_argv(t_list **a, char *str)
 		}
 		position++;
 		*a = ft_create_node(a, value, position);
-//		printf("Valeur de (*a)->value = %d\n", (*a)->value);
 		i -= (len + 1);
 	}
 	return (*a);
@@ -89,42 +180,63 @@ int	main(int argc, char **argv)
 {
 	t_list	**a;
 	t_list	**b;
+	char		*str;
 //	t_list	*tmp;
-	int	count;
+	int		count;
 
 	a = (t_list **)malloc(sizeof(t_list));
 	b = (t_list **)malloc(sizeof(t_list));
+	str = NULL;
 //	tmp = *a;
 	count = 0;
 	if (a == NULL || b == NULL)
 		return (-1);
 	*a = NULL;
 	*b = NULL;
-	if (argc != 2)
+	if (argc < 2)
 		ft_exit(a, b);
-	if (!ft_argv_compliant(argv[1])) // Verifier controles sur les --, ++, etc
+	if (!ft_argv_compliant(argv)) // Verifier controles sur les --, ++, etc
+	{
+		printf("La liste d'arguments n'est pas conforme.\n");
 		ft_exit(a, b);
-	*a = ft_convert_argv(a, argv[1]);
+	}
+	if (argc == 2)
+		str = ft_create_str(argv,  ft_len_argv(argv));
+	else
+		str = ft_create_strjoin(argv, str);
+	printf("str = %sEND\n", str);
+	*a = ft_convert_argv(a, str);
+	free(str);
 	if (*a == NULL)
 	{
 		printf("Value = NULL\n");
 		ft_free(a, b);
 		return (0);
 	}
+	ft_print_stack(a);
 	if (!ft_duplicate(*a)) // Tester liste avec doublons (+valgrind)
 		ft_exit(a, b);
+	ft_print_stack(a);
 	if (ft_check_list(a))
 	{
 		ft_free(a, b);
 		return (0);
 	}
+
 	if (ft_lstsize(*a) > 5) // Finaliser ft_sort_small_stack
 	{
 		ft_fill_index(a);
-		count = ft_push_bits_zero_to_b(a, b);
-		printf("Nombre de coups = %d\n", count);
+//		count += ft_presort(a, b);
 		ft_print_stack(a);
 		ft_print_stack(b);
+		count += ft_push_bits_zero_to_b(a, b);
+		ft_print_stack(a);
+		ft_print_stack(b);
+		if (ft_check_list(a))
+			printf("La liste est triee.\n");
+		else
+			printf("Erreur : La liste n'est pas triee !!\n");
+		printf("Nombre de coups = %d\n", count);
 	}
 
 /*	else

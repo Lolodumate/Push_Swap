@@ -12,27 +12,28 @@
 
 #include "push_swap.h"
 
-t_list	*ft_add_node(t_list *e, int e_value, int e_position)
+t_list	*ft_add_node(t_list *lst, int e_value, int e_position)
 {
-	t_list	*tmp;
+	t_list	*new;
 	
-	tmp = malloc(sizeof(*tmp));
-	if (tmp == NULL)
+	new = malloc(sizeof(*new));
+	if (new == NULL)
 	{
-		ft_free_stack(e);
+		ft_free_stack(new);
 		return (NULL);
 	}
-	tmp->value = e_value;
-	tmp->position = e_position;
-	tmp->smallest_value_indicator = 0;
-	tmp->greatest_value_indicator = 0;
-	tmp->index = 0;
-	tmp->index_tmp = 0;
-	tmp->count = 0;
-	tmp->binary_index = 0;
-	tmp->len_binary = 0;
-	tmp->next = e;
-	return (tmp);
+	new->value = e_value;
+	new->position = e_position;
+	new->smallest_value_indicator = 0;
+	new->greatest_value_indicator = 0;
+	new->index = 0;
+	new->index_tmp = 0;
+	new->count = 0;
+	new->binary_index = 0;
+	new->len_binary = 0;
+	new->lock = 0;
+	new->next = lst;
+	return (new);
 }
 
 t_list	*ft_free_stack(t_list *lst)
@@ -76,7 +77,7 @@ void	ft_print_stack(t_list **lst)
 //	lst_name = tmp->name_stack;
 	while (tmp)
 	{
-		printf("#%4d - Pile[%c] - I [%4d] - I_Bits %32d - I_tmp %32d - Small [%d] - Value [%d]\n", tmp->position, tmp->name_stack, tmp->index, tmp->binary_index, tmp->index_tmp, tmp->smallest_value_indicator, tmp->value);
+		printf("#%3d - Pile[%c] - I [%4d] - Lock %d - I_Bits %12d - I_tmp %8d - Value [%d]\n", tmp->position, tmp->name_stack, tmp->index, tmp->lock, tmp->binary_index, tmp->index_tmp,/* tmp->smallest_value_indicator,*/ tmp->value);
 		tmp = tmp->next;
 		if (tmp == NULL)
 			printf("ft_stack.c l.82 A EFFACER : Fin de la pile.\n\n");
