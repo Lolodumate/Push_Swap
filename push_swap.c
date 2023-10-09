@@ -84,43 +84,58 @@ char	*ft_create_str(char **argv, int len)
 	i = 0;
 	j = 1;
 	k = 0;
+	if (len == 0)
+		return (NULL);
 	str = ft_calloc(sizeof(char), len + 1);
 	if (str == NULL)
 		return (NULL);
 	str[len] = '\0';
-	printf("Valeur de str[len] -> str[%d] = %c\n", len, str[len]);
 	while (argv[j])
 	{
 		printf("argv[j] = %s\n", argv[j]);
 		while (argv[j][i])
 		{
 			str[k] = argv[j][i];
-			printf("str[k] -> str[%d] = %c\n", k, str[k]);
 			k++;		
 			i++;
 		}
 		i = 0;
 		j++;
-//		printf("argv[j] = %s\n", argv[j]);
 		if (argv[j])
 		{
 			k++;
 			str[k] = ' ';
-			printf("str[k] -> str[%d] = %cSPACE\n", k, str[k]);
 		}
 	}
-	printf("Valeur de retour str dans ft_create_str = %s\n", str);
 	return (str);
 }
 
-char	*ft_create_strjoin(char **argv, char *str)
+char	*ft_create_strjoin(char **argv, char *str, int len)
 {
+	int		i;
 	int		j;
+	int		k;
 
-	j = 0;
+	i = 0;
+	j = 1;
+	k = 0;
+	if (len == 0)
+		return (NULL);
+	str = ft_calloc(sizeof(char), len + 2);
+	if (str == NULL)
+		return (NULL);
 	while (argv[j])
 	{
-		str = ft_strjoin(str, argv[j]);
+		while (argv[j][i])
+		{
+			str[k] = argv[j][i];
+
+			k++;
+			i++;
+		}
+		str[k] = ' ';
+		k++;
+		i = 0;
 		j++;
 	}
 	return (str);
@@ -167,10 +182,7 @@ t_list	*ft_duplicate(t_list *a)
 	while (a)
 	{
 		if (ft_check_duplicate(a->value, a) != NULL)
-		{
-//			printf("Erreur ft_check_duplicate = NULL\n");
 			return (NULL);
-		}
 		a = a->next;
 	}
 	return (tmp);
@@ -186,7 +198,7 @@ int	main(int argc, char **argv)
 
 	a = (t_list **)malloc(sizeof(t_list));
 	b = (t_list **)malloc(sizeof(t_list));
-	str = NULL;
+	str = "0";
 //	tmp = *a;
 	count = 0;
 	if (a == NULL || b == NULL)
@@ -201,9 +213,11 @@ int	main(int argc, char **argv)
 		ft_exit(a, b);
 	}
 	if (argc == 2)
-		str = ft_create_str(argv,  ft_len_argv(argv));
+		str = ft_create_str(argv, ft_len_argv(argv));
 	else
-		str = ft_create_strjoin(argv, str);
+		str = ft_create_strjoin(argv, str, ft_len_argv(argv));
+	if (str == NULL)
+		ft_exit(a, b);
 	printf("str = %sEND\n", str);
 	*a = ft_convert_argv(a, str);
 	free(str);
@@ -253,9 +267,6 @@ int	main(int argc, char **argv)
 /*	ft_print_stack(a);
 	ft_print_stack(b);
 */
-//	ft_print_stack(a);
-//	ft_print_stack(b);
-	
 //	if (ft_check_list(a))
 //		printf("La liste est triee.\n");
 //	printf("Nombre de coups = %d\n", count);

@@ -35,7 +35,7 @@ typedef struct	s_list
 }		t_list;
 
 char				*ft_create_str(char **argv, int len);
-char				*ft_create_strjoin(char **argv, char *str);
+char				*ft_create_strjoin(char **argv, char *str, int len);
 char				*ft_strcpy(char *str1, char *str2, int j);
 char				*ft_fill_value(char *str, char *value, int i, int len);
 char				*ft_strjoin(char *s1, char *s2);
@@ -44,7 +44,6 @@ int			ft_len_argv(char **argv);
 int			ft_isdigit(char c);
 int			ft_is_greater_than(t_list **lst);
 int			ft_limits(long long value);
-//int			ft_place_index(char *str, int i);
 int			ft_atoi(char *str);
 int			ft_strchr(char *str, char c);
 int			ft_check_list(t_list **lst);
@@ -56,7 +55,6 @@ int			ft_greatest_len_binary(t_list **a);
 int			ft_convert_binary(int index); // utils.c - Trop de lignes.
 t_list			*ft_smallest_value(t_list **lst); // ft_sort.c - Trop de lignes.
 t_list			*ft_greatest_value(t_list **lst);
-//void		ft_swap(t_list **lst);
 void		ft_exit(t_list **a, t_list **b);
 void		ft_free(t_list **a, t_list **b);
 void		ft_len_binary(t_list **a);
