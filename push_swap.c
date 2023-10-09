@@ -17,15 +17,14 @@
  * Visualiser : https://github.com/elijahkash/push_swap_gui
  */
 
+// Create a string with only one argument
 char	*ft_create_str(char **argv, int len) 
 {
 	int		i;
-	int		j;
 	int		k;
 	char	*str;
 
 	i = 0;
-	j = 1;
 	k = 0;
 	if (len == 0)
 		return (NULL);
@@ -33,26 +32,16 @@ char	*ft_create_str(char **argv, int len)
 	if (str == NULL)
 		return (NULL);
 	str[len] = '\0';
-	while (argv[j])
+	while (argv[1][i])
 	{
-		printf("argv[j] = %s\n", argv[j]);
-		while (argv[j][i])
-		{
-			str[k] = argv[j][i];
-			k++;		
-			i++;
-		}
-		i = 0;
-		j++;
-		if (argv[j])
-		{
-			k++;
-			str[k] = ' ';
-		}
+		str[k] = argv[1][i];
+		k++;		
+		i++;
 	}
 	return (str);
 }
 
+// Create one single string with several arguments
 char	*ft_create_strjoin(char **argv, char *str, int len)
 {
 	int		i;
@@ -60,31 +49,27 @@ char	*ft_create_strjoin(char **argv, char *str, int len)
 	int		k;
 
 	i = 0;
-	j = 1;
+	j = 0;
 	k = 0;
-	if (len == 0)
-		return (NULL);
 	str = ft_calloc(sizeof(char), len + 2);
 	if (str == NULL)
 		return (NULL);
-	while (argv[j])
+	while (argv[++j])
 	{
 		while (argv[j][i])
 		{
 			str[k] = argv[j][i];
-
 			k++;
 			i++;
 		}
 		str[k] = ' ';
 		k++;
 		i = 0;
-		j++;
 	}
 	return (str);
 }
 
-t_list	*ft_convert_argv(t_list **a, char *str)
+t_list	*ft_build_stack(t_list **a, t_list **b, char *str)
 {
 	int			position;
 	int			i;
@@ -98,28 +83,37 @@ t_list	*ft_convert_argv(t_list **a, char *str)
 		while (str[i] && !ft_isdigit(str[i]))
 			i--;
 		len = ft_len_number(str, i);
-		value = ft_calloc(sizeof(char), len + 1);
-		if (value == NULL)
-			return (NULL);
-		value = ft_fill_value(str, value, i, len);
-		if (value == NULL)
-		{
-			printf("Value = NULL\n");
-			free(value);
-			return (NULL);
-		}
+		value = ft_create_value(str, i, len);
 		position++;
 		*a = ft_create_node(a, value, position);
-//		printf("unsigned int (*a)->value = %u - int = %d\n", (*a)->value, (*a)->value);
-/*		if (!ft_limits((unsigned int)(*a)->value))
+		if (*a == NULL)
 		{
-			printf("Erreur limits d'entiers.\n");
-			return (NULL);
+			free(value);
+			free(str);
+			ft_exit(a, b);
 		}
-*/		i -= (len + 1);
+		i -= (len + 1);
 	}
 	return (*a);
 }
+
+char	*ft_build_str(int argc, char **argv, t_list **a, t_list **b, char *str)
+{
+        if (argc < 2 || !ft_argv_compliant(argv))
+                ft_exit(a, b);
+        if (argc == 2 && ft_len_argv(argv) > 0)
+                str = ft_create_str(argv, ft_len_argv(argv));
+        else if (argc > 2 && ft_len_argv(argv) > 0)
+                str = ft_create_strjoin(argv, str, ft_len_argv(argv));
+        else
+                ft_exit(a, b);
+        if (str == NULL)
+                ft_exit(a, b);
+	return (str);
+}
+
+// Test : make m && valgrind ./push_swap 5 3 4 6 7 8 1 2 9 0-0000000 10
+//
 
 int	main(int argc, char **argv)
 {
@@ -138,54 +132,23 @@ int	main(int argc, char **argv)
 		return (-1);
 	*a = NULL;
 	*b = NULL;
-	if (argc < 2)
-		ft_exit(a, b);
-	if (!ft_argv_compliant(argv)) // Verifier controles sur les --, ++, etc
-	{
-		printf("La liste d'arguments n'est pas conforme.\n");
-		ft_exit(a, b);
-	}
-	if (argc == 2)
-		str = ft_create_str(argv, ft_len_argv(argv));
-	else
-		str = ft_create_strjoin(argv, str, ft_len_argv(argv));
-	if (str == NULL)
-		ft_exit(a, b);
-//	printf("str = %sEND\n", str);
-	*a = ft_convert_argv(a, str);
+	str = ft_build_str(argc, argv, a, b, str);
+	*a = ft_build_stack(a, b, str);
+	ft_fill_index(a);
 	free(str);
 	if (*a == NULL)
 	{
-		printf("Value = NULL\n");
 		ft_free(a, b);
 		return (0);
 	}
 	if (!ft_duplicate(*a)) // Tester liste avec doublons (+valgrind)
 		ft_exit(a, b);
-//	ft_print_stack(a);
-	if (ft_check_list(a))
-	{
-//		printf("La liste est triee.\n");
-		ft_free(a, b);
-		return (0);
-	}
-
-	if (ft_lstsize(*a) > 2) // Finaliser ft_sort_small_stack
-	{
-		ft_fill_index(a);
-//		count += ft_presort(a, b);
-//		ft_print_stack(a);
-//		ft_print_stack(b);
-		count += ft_push_bits_zero_to_b(a, b);
-//		ft_print_stack(a);
-//		ft_print_stack(b);
-/*		if (ft_check_list(a))
-			printf("La liste est triee.\n");
-		else
-			printf("Erreur : La liste n'est pas triee !!\n");
-		printf("Nombre de coups = %d\n", count);
-*/	}
-
+	if (!ft_check_list(a))
+		if (ft_lstsize(*a) > 2) // Finaliser ft_sort_small_stack
+			count += ft_push_bits_zero_to_b(a, b);
+			
+			
+//	printf("Nombre de coups = %d\n", count);
 /*	else
 	{
 		int	res;
@@ -197,11 +160,11 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 */	
-/*	ft_print_stack(a);
+	ft_print_stack(a);
 	ft_print_stack(b);
-*/
-//	if (ft_check_list(a))
-//		printf("La liste est triee.\n");
+	if (ft_check_list(a))
+		printf("La liste est triee.\n");
+
 //	printf("Nombre de coups = %d\n", count);
 
 

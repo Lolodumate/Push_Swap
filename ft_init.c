@@ -37,6 +37,8 @@ t_list	*ft_create_node(t_list **a, char *value, int position)
 {
 	if (!a || !value)
 		return (NULL);
+	if (!ft_limits(ft_atoi(value)))
+		return (NULL);
 	*a = ft_add_node(*a, (int)ft_atoi(value), position);
 	(*a)->name_stack = 'A';
 	free(value);
@@ -44,11 +46,12 @@ t_list	*ft_create_node(t_list **a, char *value, int position)
 }
 
 // Verification des limites d'entiers pour ft_convert_argv
-int	ft_limits(unsigned int value)
+// Transformer la string Value en long et la comparer a INT_MIN et INT_MAX
+int	ft_limits(long value)
 {
-	if (value > 2147483647)
-		return (1);
-	return (0);
+	if (value < INT_MIN || value > INT_MAX)
+		return (0);
+	return (1);
 }
 
 t_list	*ft_duplicate(t_list *a)

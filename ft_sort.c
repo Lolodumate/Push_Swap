@@ -112,13 +112,6 @@ int	ft_sort_small_stack(t_list **a, t_list **b)
 	return (count);
 }
 
-/*
-void	ft_sort_big_stack(t_list **a)
-{
-
-}
-*/
-
 void	ft_fill_index(t_list **a)
 {
 	int		i;
@@ -145,6 +138,8 @@ void	ft_fill_index(t_list **a)
 	}
 }
 
+// Fonction probablement inutile et a effacer
+/*
 t_list	*ft_pa(t_list **a, t_list **b)
 {
 	t_list	*tmp;
@@ -155,7 +150,7 @@ t_list	*ft_pa(t_list **a, t_list **b)
 		return (NULL);
 	return (ft_pa(a, b));
 }
-
+*/
 t_list	*ft_smallest_value(t_list **lst)
 {
 	t_list		*tmp;
@@ -172,13 +167,6 @@ t_list	*ft_smallest_value(t_list **lst)
 		i++;
 		if (t_small->next)
 			t_small = t_small->next;
-/*		else
-		{
-			t_small->smallest_value_indicator = 1;
-			break ;
-		}
-	}
-*/
 		if (t_small->index == 1)
 			t_small->smallest_value_indicator = 1;
 		if (i == tmp->position)
@@ -186,7 +174,6 @@ t_list	*ft_smallest_value(t_list **lst)
 			t_small->index = tmp->position;
 			t_small->smallest_value_indicator = 1;
 			t_small = t_small->next;
-//			printf("OOOOOOOOOOOOOOOOO\n");
 			return (t_small);
 		}
 	}
