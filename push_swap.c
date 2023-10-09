@@ -16,64 +16,7 @@
 /*
  * Visualiser : https://github.com/elijahkash/push_swap_gui
  */
-int	ft_argv_compliant(char **argv)
-{
-	int	i;
-	int	j;
-	int	len;
 
-	i = 0;
-	j = 1;
-	len = 0;
-	while (argv[j])
-	{
-		while (ft_isdigit(argv[j][i]) || argv[j][i] == ' ')
-		{
-			if (argv[j][i] == '-' || argv[j][i] == '+')
-				if (!argv[j][i + 1] || argv[j][i + 1] == '-' || argv[j][i + 1] == '+' || argv[j][i + 1] == ' ')
-					return (0);
-			i++;
-			len ++;
-		}
-		if (argv[j][i] == '\0')
-		{
-			j++;
-			i = 0;
-		}
-		else
-			return (0);
-	}
-	return (len);
-}
-
-int	ft_len_argv(char **argv)
-{
-	int	i;
-	int	j;
-	int	len;
-
-	i = 0;
-	j = 1;
-	len = 0;
-	while (argv[j])
-	{
-		while (argv[j][i])
-		{
-			len++;
-			i++;
-		}
-		i = 0;
-		j++;
-		if (argv[j])
-			len++;
-	}
-	return (len);
-}
-
-// Test OK avec un seul argument entre guillemets
-// Test OK avec plusieurs arguments sans les guillemets et separes par UN SEUL espace
-// Test KO avec plusieurs arguments sans les guillemets et separes par plusieurs espaces
-// Solution : s'il y a plusieurs espaces à la suite dans les arguments, alors il faut les remplacer par un seul espace dans la chaîne de caracteres finale (str)
 char	*ft_create_str(char **argv, int len) 
 {
 	int		i;
@@ -167,25 +110,15 @@ t_list	*ft_convert_argv(t_list **a, char *str)
 		}
 		position++;
 		*a = ft_create_node(a, value, position);
-		i -= (len + 1);
+//		printf("unsigned int (*a)->value = %u - int = %d\n", (*a)->value, (*a)->value);
+/*		if (!ft_limits((unsigned int)(*a)->value))
+		{
+			printf("Erreur limits d'entiers.\n");
+			return (NULL);
+		}
+*/		i -= (len + 1);
 	}
 	return (*a);
-}
-
-t_list	*ft_duplicate(t_list *a)
-{
-	t_list	*tmp;
-
-	tmp = a;
-	if (a == NULL)
-		return (NULL);
-	while (a)
-	{
-		if (ft_check_duplicate(a->value, a) != NULL)
-			return (NULL);
-		a = a->next;
-	}
-	return (tmp);
 }
 
 int	main(int argc, char **argv)
@@ -218,7 +151,7 @@ int	main(int argc, char **argv)
 		str = ft_create_strjoin(argv, str, ft_len_argv(argv));
 	if (str == NULL)
 		ft_exit(a, b);
-	printf("str = %sEND\n", str);
+//	printf("str = %sEND\n", str);
 	*a = ft_convert_argv(a, str);
 	free(str);
 	if (*a == NULL)
@@ -227,31 +160,31 @@ int	main(int argc, char **argv)
 		ft_free(a, b);
 		return (0);
 	}
-	ft_print_stack(a);
 	if (!ft_duplicate(*a)) // Tester liste avec doublons (+valgrind)
 		ft_exit(a, b);
-	ft_print_stack(a);
+//	ft_print_stack(a);
 	if (ft_check_list(a))
 	{
+//		printf("La liste est triee.\n");
 		ft_free(a, b);
 		return (0);
 	}
 
-	if (ft_lstsize(*a) > 5) // Finaliser ft_sort_small_stack
+	if (ft_lstsize(*a) > 2) // Finaliser ft_sort_small_stack
 	{
 		ft_fill_index(a);
 //		count += ft_presort(a, b);
-		ft_print_stack(a);
-		ft_print_stack(b);
+//		ft_print_stack(a);
+//		ft_print_stack(b);
 		count += ft_push_bits_zero_to_b(a, b);
-		ft_print_stack(a);
-		ft_print_stack(b);
-		if (ft_check_list(a))
+//		ft_print_stack(a);
+//		ft_print_stack(b);
+/*		if (ft_check_list(a))
 			printf("La liste est triee.\n");
 		else
 			printf("Erreur : La liste n'est pas triee !!\n");
 		printf("Nombre de coups = %d\n", count);
-	}
+*/	}
 
 /*	else
 	{

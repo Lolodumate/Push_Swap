@@ -1,8 +1,5 @@
 #include "push_swap.h"
 
-// ra : le premier devient le dernier.
-// pb : le premier de a devient le premier de b.
-
 // Size of each binary index
 void	ft_len_binary(t_list **a)
 {
@@ -60,14 +57,12 @@ int	ft_push_bits_zero_to_b(t_list **a, t_list **b)
 	int		tmp;
 	int		pos;
 	int		count;
-//	int		i;
 
 	if (a == NULL)
 		return (-1);
 	tmp = 0;
 	count = 0;
 	pos = (*a)->position;
-//	i = (*a)->position;
 	greatest_binary = ft_greatest_len_binary(a);
 	while (greatest_binary > 0)
 	{
@@ -76,25 +71,13 @@ int	ft_push_bits_zero_to_b(t_list **a, t_list **b)
 		{
 			tmp = (*a)->index_tmp % 2;
 			(*a)->index_tmp /= 10;
-			// Cette section permet d'identifer le plus grand nombre et de le placer en bas de la pile B pour le mettre en attente. Ainsi, Radix aura moins de traitements à faire.
-			// Elle permet de diminier le nombre de coups de quelques dizaines sur une liste de 100 nombres.
-/*			if ((*a)->index == i)
-			{
-				(*a)->lock = 1;
-				pb(a, b);
-				count++;
-				rb(b);
-				i--;
-			}
-			else*/ if (tmp == 0)
+			if (tmp == 0)
 				pb(a, b);
 			else
 				ra(a);
 			count++;
 		}
-		ft_print_stack(a);
-		ft_print_stack(b);
-		while (*b/* && (*b)->lock != 1*/)
+		while (*b)
 		{
 			pa(a, b);
 			count++;
@@ -109,12 +92,7 @@ int	ft_push_bits_zero_to_b(t_list **a, t_list **b)
 				pa(a, b);
 				count++;
 			}
-/*			while (pos-- > 0)
-			{
-				ra(a);
-				count++;
-			}
-*/		}
+		}
 	}
 	return (count);
 }

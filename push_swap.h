@@ -43,7 +43,7 @@ int			ft_argv_compliant(char **argv);
 int			ft_len_argv(char **argv);
 int			ft_isdigit(char c);
 int			ft_is_greater_than(t_list **lst);
-int			ft_limits(long long value);
+int			ft_limits(unsigned int value);
 int			ft_atoi(char *str);
 int			ft_strchr(char *str, char c);
 int			ft_check_list(t_list **lst);
