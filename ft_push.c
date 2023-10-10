@@ -6,14 +6,13 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:10:23 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/26 18:13:40 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/10 17:06:14 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
-void	pa(t_list **a, t_list **b) // Deplace le premier element de b sur la pile a
+void	pa(t_list **a, t_list **b)
 {
 	int		pos;
 	t_list	*stack_a;
@@ -34,10 +33,10 @@ void	pa(t_list **a, t_list **b) // Deplace le premier element de b sur la pile a
 	stack_b->name_stack = 'A';
 	*a = stack_b;
 	*b = tmp_b;
-	write(1,"pa\n", 3);
+	write(1, "pa\n", 3);
 }
 
-void	pb(t_list **a, t_list **b) // Deplace le premier element de a sur la pile b
+void	pb(t_list **a, t_list **b)
 {
 	int		pos;
 	t_list	*stack_a;

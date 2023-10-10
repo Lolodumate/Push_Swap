@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:22:30 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/25 15:42:18 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/10 17:03:17 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	sa(t_list **a)
 {
 	t_list		*top;
 	t_list		*tmp;
-	int	tmp_value;
-	int	tmp_position;
-	int	tmp_index;
+	int			tmp_value;
+	int			tmp_position;
+	int			tmp_index;
 
 	top = *a;
 	tmp = top->next;
@@ -44,9 +44,9 @@ void	sb(t_list **b)
 {
 	t_list	*top;
 	t_list	*tmp;
-	int	tmp_value;
-	int	tmp_position;
-	int	tmp_index;
+	int		tmp_value;
+	int		tmp_position;
+	int		tmp_index;
 
 	top = *b;
 	tmp = top->next;
@@ -74,34 +74,7 @@ void	ss(t_list **a, t_list **b)
 	sb(b);
 	write(1, "ss\n", 3);
 }
-/*
-int	ft_do_swap(t_list **a, t_list **b)
-{
-	int		check_a;
-	int		check_b;
-	t_list	*tmp_a;
-	t_list	*tmp_b;
 
-	check_a = 0;
-	check_b = 0;
-	tmp_a = *a;
-	tmp_b = *b;
-	if (*a == NULL || *b == NULL)
-		return (0);
-	check_a = tmp_a->binary_index;
-	check_b = tmp_b->binary_index;
-	tmp_a = tmp_a->next;
-	tmp_b = tmp_b->next;
-	if (check_a < tmp_a->binary_index)
-		if (check_b < tmp_b->binary_index)
-		{
-			ss(a, b);
-			return (1);
-		}
-	return (0);
-		
-}
-*/
 int	ft_is_greater_than(t_list **lst)
 {
 	int		n;

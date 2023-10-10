@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:24:31 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/25 16:27:35 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/10 15:56:49 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,9 @@ void	*ft_memset(void *s, int c, size_t n)
 
 long	ft_atoi(char *value)
 {
-	int	i;
-	int	sign;
-	long 	res;
+	int		i;
+	int		sign;
+	long	res;
 
 	i = 0;
 	sign = 1;

@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 21:07:27 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/29 08:39:04 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/10 22:27:01 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_check_list(t_list **lst)
 {
-	t_list		*tmp;
-	int	i;
-	int	n;
+	t_list	*tmp;
+	int		i;
+	int		n;
 
 	tmp = *lst;
 	i = 1;
@@ -48,7 +48,6 @@ int	ft_sort_small_stack(t_list **a, t_list **b)
 //	ft_smallest_value(a);
 //	ft_print_stack(a);
 	ft_fill_index(a);
-//	ft_print_stack(a);
 	while (!ft_check_list(a) || ft_lstsize(*a) == 1)
 	{
 //		ft_smallest_value(a);
@@ -56,27 +55,16 @@ int	ft_sort_small_stack(t_list **a, t_list **b)
 		{
 			sa(a);
 			count++;
-//			ft_print_stack(a);
-//			ft_print_stack(b);
 		}
 		if (ft_check_list(a) && *b == NULL)
-			return(count);
-//		printf("Valeur de a->position = %d\n", (*a)->position);
+			return (count);
 		pb(a, b);
-//		if (*a)
-//			printf("Valeur de a->position = %d\n", (*a)->position);
 		if (ft_is_greater_than(b))
 		{
 			rb(b);
 			count++;
 		}
-/*		if (*a)
-			printf("Valeur de a->position = %d\n", (*a)->position);
-		if (*b)
-			printf("Valeur de b->position = %d\n", (*b)->position);
-		count++;*/
-//		ft_print_stack(a);
-//		ft_print_stack(b);
+		count++;
 /*		if (ft_lstsize(*b) == 3)
 			while (i < 3)
 			{
@@ -115,8 +103,8 @@ int	ft_sort_small_stack(t_list **a, t_list **b)
 void	ft_fill_index(t_list **a)
 {
 	int		i;
-	int	bits;
-	int	pos;
+	int		bits;
+	int		pos;
 	t_list	*tmp;
 
 	i = 0;
@@ -138,70 +126,30 @@ void	ft_fill_index(t_list **a)
 	}
 }
 
-// Fonction probablement inutile et a effacer
-/*
-t_list	*ft_pa(t_list **a, t_list **b)
-{
-	t_list	*tmp;
-
-	tmp = *b;
-	pa(a, b);
-	if (tmp == NULL)
-		return (NULL);
-	return (ft_pa(a, b));
-}
-*/
 t_list	*ft_smallest_value(t_list **lst)
 {
-	t_list		*tmp;
-	t_list		*t_small;
-	int	smallest;
-	int	i;
+	t_list	*t_small;
+	int		smallest;
 
-	tmp = *lst;
 	t_small = *lst;
 	smallest = 0;
-	i = 0;
 	while (t_small && t_small->index != 0)
 	{
-		i++;
-		if (t_small->next)
-			t_small = t_small->next;
-		if (t_small->index == 1)
-			t_small->smallest_value_indicator = 1;
-		if (i == tmp->position)
-		{
-			t_small->index = tmp->position;
-			t_small->smallest_value_indicator = 1;
-			t_small = t_small->next;
-			return (t_small);
-		}
+		t_small = ft_loop_smallest_ptr(lst);
 	}
 	if (t_small == NULL)
 		return (NULL);
 	smallest = t_small->value;
 	t_small->smallest_value_indicator = 1;
-	while (tmp)
-	{
-		tmp = tmp->next;
-		if (tmp && smallest > tmp->value && tmp->index == 0)
-		{
-			t_small->smallest_value_indicator = 0;
-			t_small = tmp;
-			smallest = tmp->value;
-			t_small->smallest_value_indicator = 1;
-		}
-	}
-	if (tmp == NULL && t_small->index != 0)
-		t_small = NULL;
+	t_small = ft_loop_find_smallest_value(lst, t_small, smallest);
 	return (t_small);
 }
 
 t_list	*ft_greatest_value(t_list **lst)
 {
-	t_list		*tmp;
-	t_list		*t_great;
-	int	greatest;
+	t_list	*tmp;
+	t_list	*t_great;
+	int		greatest;
 
 	tmp = *lst;
 	t_great = tmp;

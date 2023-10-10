@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_radix.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/10 20:34:41 by laroges           #+#    #+#             */
+/*   Updated: 2023/10/10 20:47:45 by laroges          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 // Size of each binary index
@@ -18,11 +30,7 @@ void	ft_len_binary(t_list **a)
 		if (i == 0)
 			len = 1;
 		else
-			while (i > 0)
-			{
-				i /= 10;
-				len++;
-			}
+			len = ft_loop_len_binary(tmp);
 		tmp->len_binary = len;
 		len = 0;
 		tmp = tmp->next;
@@ -54,45 +62,24 @@ int	ft_greatest_len_binary(t_list **a)
 int	ft_push_bits_zero_to_b(t_list **a, t_list **b)
 {
 	int		greatest_binary;
-	int		tmp;
 	int		pos;
 	int		count;
 
 	if (a == NULL)
 		return (-1);
-	tmp = 0;
 	count = 0;
 	pos = (*a)->position;
 	greatest_binary = ft_greatest_len_binary(a);
 	while (greatest_binary > 0)
 	{
 		pos = (*a)->position;
-		while (*a && pos-- > 0)
-		{
-			tmp = (*a)->index_tmp % 2;
-			(*a)->index_tmp /= 10;
-			if (tmp == 0)
-				pb(a, b);
-			else
-				ra(a);
-			count++;
-		}
+		count += ft_loop_push_to_b(a, b, pos);
 		while (*b)
 		{
 			pa(a, b);
 			count++;
 		}
 		greatest_binary--;
-		if (greatest_binary == 0)
-		{
-			if (*b)
-				pos = (*b)->position;
-			while (*b)
-			{
-				pa(a, b);
-				count++;
-			}
-		}
 	}
 	return (count);
 }

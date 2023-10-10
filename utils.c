@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:41:53 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/28 23:32:03 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/10 21:03:39 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,32 +63,17 @@ int	ft_convert_int(char *str, int i)
 // Convertir les index en binaire
 int	ft_convert_binary(int index)
 {
-	int		i;
-	int		j;
 	int		bits_int;
 	char	bits[64];
 	char	*res;
 
-	i = 0;
-	j = 0;
 	bits_int = 0;
+	bits[0] = '\0';
 	res = malloc(sizeof(char) * 64 + 1);
 	if (res == NULL)
 		return (-1);
 	res[64] = '\0';
-	while (i < 64)
-	{
-		bits[i] = (index % 2) + '0';
-		index /= 2;
-		i++;
-	}
-	i = 63;
-	while (i >= 0)
-	{
-		res[j] = bits[i];
-		j++;
-		i--;
-	}
+	res = ft_bits_convert_binary(index, res, bits);
 	bits_int = ft_atoi(res);
 	free(res);
 	return (bits_int);

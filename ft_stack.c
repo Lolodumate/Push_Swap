@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:12:47 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/29 00:45:14 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/10 17:42:56 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_list	*ft_add_node(t_list *lst, int e_value, int e_position)
 {
 	t_list	*new;
-	
+
 	new = malloc(sizeof(*new));
 	if (new == NULL)
 	{
@@ -41,10 +41,7 @@ t_list	*ft_free_stack(t_list *lst)
 	t_list	*tmp;
 
 	if (lst == NULL)
-	{
-//		printf("ft_stack.c l.44 A EFFACER - La pile a ete nettoyee.\n");
 		return (NULL);
-	}
 	tmp = lst->next;
 	free(lst);
 	return (ft_free_stack(tmp));
@@ -64,17 +61,14 @@ t_list	*ft_check_duplicate(int value, t_list *a)
 
 void	ft_print_stack(t_list **lst)
 {
-//	char	lst_name;
 	t_list	*tmp;
 
-//	lst_name = 0;
 	tmp = *lst;
 	if (*lst == NULL)
 	{
 		printf("\nft_stack.c l.73 A EFFACER : La pile est vide.\n\n");
 		return ;
 	}
-//	lst_name = tmp->name_stack;
 	while (tmp)
 	{
 		printf("#%3d - Pile[%c] - I [%3d] - I_Bits %12d - I_tmp %8d - Value [%d]\n", tmp->position, tmp->name_stack, tmp->index, tmp->binary_index, tmp->index_tmp,/* tmp->smallest_value_indicator,*/ tmp->value);

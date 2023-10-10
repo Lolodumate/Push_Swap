@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_init.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/10 18:13:52 by laroges           #+#    #+#             */
+/*   Updated: 2023/10/10 20:30:13 by laroges          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-// Calcul de longueur pour ft_convert_argv
+// Calculation of the lenght for ft_convert_argv
 int	ft_len_number(char *str, int i)
 {
 	int	len;
@@ -18,7 +30,7 @@ int	ft_len_number(char *str, int i)
 	return (len);
 }
 
-// Remplissage de (*a)->value pour ft_convert_argv
+// Filling of the (*a)->value for ft_convert_argv
 char	*ft_fill_value(char *str, char *value, int i, int len)
 {
 	if (!str || !value || len == 0)
@@ -45,8 +57,7 @@ t_list	*ft_create_node(t_list **a, char *value, int position)
 	return (*a);
 }
 
-// Verification des limites d'entiers pour ft_convert_argv
-// Transformer la string Value en long et la comparer a INT_MIN et INT_MAX
+// Check of the integer limits for ft_convert_argv
 int	ft_limits(long value)
 {
 	if (value < INT_MIN || value > INT_MAX)
