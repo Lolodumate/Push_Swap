@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:29:24 by laroges           #+#    #+#             */
-/*   Updated: 2023/10/10 22:40:10 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/11 21:19:56 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,10 +131,13 @@ int	main(int argc, char **argv)
 	*b = NULL;
 	*a = ft_init_stack_a(argc, argv, a, b);
 	if (!ft_check_list(a))
-		if (ft_lstsize(*a) > 2) // Finaliser ft_sort_small_stack
+	{
+		if (ft_lstsize(*a) > 5) // Finaliser ft_sort_small_stack
 			count += ft_push_bits_zero_to_b(a, b);
-/*	ft_print_stack(a);
-	ft_print_stack(b);
+		else
+			count += ft_sort_small_stack(a, b);
+	}
+/*	printf("Nombre de coups = %d\n", count);
 	if (ft_check_list(a))
 		printf("La liste est triee.\n");
 */	ft_free(a, b);

@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:12:47 by laroges           #+#    #+#             */
-/*   Updated: 2023/10/10 17:42:56 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/11 18:51:07 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_print_stack(t_list **lst)
 	}
 	while (tmp)
 	{
-		printf("#%3d - Pile[%c] - I [%3d] - I_Bits %12d - I_tmp %8d - Value [%d]\n", tmp->position, tmp->name_stack, tmp->index, tmp->binary_index, tmp->index_tmp,/* tmp->smallest_value_indicator,*/ tmp->value);
+		printf("#%3d - Pile[%c] - I [%3d] - I_Bits %12d - I_tmp %8d - Small %d - Value [%d]\n", tmp->position, tmp->name_stack, tmp->index, tmp->binary_index, tmp->index_tmp, tmp->smallest_value_indicator, tmp->value);
 		tmp = tmp->next;
 		if (tmp == NULL)
 			printf("ft_stack.c l.82 A EFFACER : Fin de la pile.\n\n");

@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 21:07:27 by laroges           #+#    #+#             */
-/*   Updated: 2023/10/10 22:27:01 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/11 20:35:37 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,65 +38,20 @@ int	ft_check_list(t_list **lst)
 int	ft_sort_small_stack(t_list **a, t_list **b)
 {
 	int		count;
-//	int		i;
 
 	count = 0;
-//	i = 0;
 	if (a == NULL || *a == NULL)
 		return (-1);
-	ft_check_list(a);
-//	ft_smallest_value(a);
-//	ft_print_stack(a);
-	ft_fill_index(a);
-	while (!ft_check_list(a) || ft_lstsize(*a) == 1)
-	{
-//		ft_smallest_value(a);
-		if (ft_is_greater_than(a))
-		{
-			sa(a);
-			count++;
-		}
-		if (ft_check_list(a) && *b == NULL)
-			return (count);
-		pb(a, b);
-		if (ft_is_greater_than(b))
-		{
-			rb(b);
-			count++;
-		}
-		count++;
-/*		if (ft_lstsize(*b) == 3)
-			while (i < 3)
-			{
-				pa(a, b);
-				count++;
-				ft_print_stack(a);
-				ft_print_stack(b);
-				ra(a);
-				count++;
-				ft_print_stack(a);
-				ft_print_stack(b);
-				i++;
-			}
-		if (ft_check_list(a))
-			return (count);
-		i = 0;*/
-/*		if (ft_check_list(a)
-			return (count);
-
-		while (*b)
-		{
-			pa(a, b);
-			ra(a);
-			count++;
-			ft_print_stack(a);
-			ft_print_stack(b);
-		}
-*/
-//		break ;
-	}
-	if (!ft_check_list(a))
-		return (-1);
+	if (ft_lstsize(*a) == 1)
+		count = 0;
+	else if (ft_lstsize(*a) == 2)
+		count = ft_stack_sized_two(a);
+	else if (ft_lstsize(*a) == 3)
+		count = ft_stack_sized_three(a);
+	else if (ft_lstsize(*a) == 4)
+		count = ft_stack_sized_four(a, b);
+	else
+		count = ft_stack_sized_five(a, b);
 	return (count);
 }
 
