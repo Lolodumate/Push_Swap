@@ -22,25 +22,27 @@ int	ft_strlen(const char *str)
 	return (len);
 }
 
-int	ft_strchr(char *str, char c)
+char	*ft_strchr(char *str, int c)
 {
 	int	i;
 
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == c)
-			return (1);
+		if (str[i] == (char)c)
+			return (&str[i]);
 		i++;
 	}
-	return (0);
+	if ((char)c == '\0')
+		return (&str[i]);
+	return (NULL);
 }
 
 int	ft_isdigit(char c)
 {
 	if (!c)
 		return (0);
-	if (ft_strchr("0123456789+-", c))
+	if (ft_strchr("0123456789+-", (int)c))
 		return (1);
 	return (0);
 }

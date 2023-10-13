@@ -65,18 +65,18 @@ int	ft_limits(long value)
 	return (1);
 }
 
-t_list	*ft_duplicate(t_list *a)
+t_list	*ft_duplicate(t_list **a)
 {
 	t_list	*tmp;
 
-	tmp = a;
-	if (a == NULL)
+	tmp = *a;
+	if (*a == NULL)
 		return (NULL);
-	while (a)
+	while (tmp)
 	{
-		if (ft_check_duplicate(a->value, a) != NULL)
+		if (ft_check_duplicate(tmp->value, tmp) != NULL)
 			return (NULL);
-		a = a->next;
+		tmp = tmp->next;
 	}
-	return (tmp);
+	return (*a);
 }

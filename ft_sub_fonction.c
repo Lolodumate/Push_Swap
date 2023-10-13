@@ -72,7 +72,7 @@ int	ft_loop_argv_compliant(char **argv, int i, int j)
 	if (argv[j][i] == '\0')
 		j++;
 	else
-		return (0);
+		return (-1);
 	return (j);
 }
 

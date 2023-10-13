@@ -28,7 +28,7 @@ t_list	*ft_init_stack_a(int argc, char **argv, t_list **a, t_list **b)
 		ft_free(a, b);
 		return (0);
 	}
-	if (!ft_duplicate(*a))
+	if (!ft_duplicate(a))
 		ft_exit(a, b);
 	return (*a);
 }

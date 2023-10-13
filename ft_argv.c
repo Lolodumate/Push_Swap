@@ -33,6 +33,8 @@ int	ft_argv_compliant(char **argv)
 			len++;
 		}
 		j = ft_loop_argv_compliant(argv, i, j);
+		if (j < 0)
+			return (0);
 		i = 0;
 	}
 	return (len);

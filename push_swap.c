@@ -104,7 +104,7 @@ char	*ft_build_str(int argc, char **argv)
 {
 	char	*str;
 
-	if (argc < 2 || !ft_argv_compliant(argv))
+	if (!ft_argv_compliant(argv))
 		return (NULL);
 	if (argc == 2 && ft_len_argv(argv) > 0)
 		str = ft_create_str(argv, ft_len_argv(argv));
@@ -129,6 +129,12 @@ int	main(int argc, char **argv)
 		return (-1);
 	*a = NULL;
 	*b = NULL;
+	if (argc < 2)
+	{
+		free(a);
+		free(b);
+		return (0);	
+	}
 	*a = ft_init_stack_a(argc, argv, a, b);
 	if (!ft_check_list(a))
 	{
