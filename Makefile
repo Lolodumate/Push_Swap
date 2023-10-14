@@ -6,7 +6,7 @@
 #    By: laroges <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/14 17:29:33 by laroges           #+#    #+#              #
-#    Updated: 2023/10/14 21:42:21 by laroges          ###   ########.fr        #
+#    Updated: 2023/10/14 23:50:12 by laroges          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,11 +46,12 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft
+	cp ./libft/libft.a .
 	$(CC) $(CFLAGS) $(OBJ) -I $(INCLUDES) $(NAMELIBFT) -o $(NAME)
 
 clean:
 	make clean -C libft
-	rm -f $(OBJ)
+	rm -f $(OBJ) $(NAMELIBFT) $(INCLUDES)$(NAMELIBFT)
 
 fclean: clean
 	rm -f $(NAME)
