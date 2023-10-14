@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:30:04 by laroges           #+#    #+#             */
-/*   Updated: 2023/10/11 20:28:24 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/14 16:50:00 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,14 @@ int				ft_lstsize(t_list *lst);
 int				ft_isdigit(char c);
 int				ft_is_greater_than(t_list **lst);
 int				ft_limits(long value);
-char				*ft_strchr(char *str, int c);
 int				ft_check_list(t_list **lst);
 int				ft_convert_int(char *str, int i);
 int				ft_presort(t_list **a, t_list **b);
 int				ft_sort(t_list **a, t_list **b);
-int				ft_sort_small_stack(t_list **a, t_list **b);
-int				ft_stack_sized_two(t_list **a);
-int				ft_stack_sized_three(t_list **a);
-int				ft_stack_sized_four(t_list **a, t_list **b);
-int				ft_stack_sized_five(t_list **a, t_list **b);
 int				ft_strlen(const char *str);
 int				ft_greatest_len_binary(t_list **a);
-int				ft_convert_binary(int index); // utils.c - Trop de lignes.
-int				ft_push_bits_zero_to_b(t_list **a, t_list **b);//ft_radix.c-Trop de lignes.
+int				ft_convert_binary(int index);
+int				ft_push_bits_zero_to_b(t_list **a, t_list **b);
 int				ft_len_number(char *str, int i);
 char			*ft_bits_convert_binary(int index, char *res, char bits[64]);
 char			*ft_build_str(int argc, char **argv);
@@ -65,6 +59,7 @@ char			*ft_create_strjoin(char **argv, int len);
 char			*ft_create_value(char *str, int i, int len);
 char			*ft_strcpy(char *str1, char *str2, int j);
 char			*ft_fill_value(char *str, char *value, int i, int len);
+char			*ft_strchr(char *str, int c);
 char			*ft_strjoin(char *s1, char *s2);
 long			ft_atoi(char *str);
 void			*ft_calloc(size_t nmemb, size_t size);
@@ -73,7 +68,11 @@ void			ft_fill_index(t_list **a);
 void			ft_free(t_list **a, t_list **b);
 void			ft_len_binary(t_list **a);
 void			*ft_memset(void *s, int c, size_t n);
-void			ft_print_stack(t_list **lst);
+void			ft_sort_small_stack(t_list **a, t_list **b);
+void			ft_stack_sized_two(t_list **a);
+void			ft_stack_sized_three(t_list **a);
+void			ft_stack_sized_four(t_list **a, t_list **b);
+void			ft_stack_sized_five(t_list **a, t_list **b);
 void			sa(t_list **a);
 void			sb(t_list **b);
 void			ss(t_list **a, t_list **b);
@@ -93,10 +92,8 @@ void			ft_lstiter(t_list *lst, void (*f)(void *));
 void			ft_update_index(t_list **a, t_list **b);
 t_list			*ft_init_stack_a(int argc, char **argv, t_list **a, t_list **b);
 t_list			*ft_loop_smallest_ptr(t_list **lst);
-t_list			*ft_loop_find_smallest_value(t_list **lst, t_list *t_small, int smallest);
+t_list			*ft_find_smallest_value(t_list **lst, t_list *t_small, int s);
 t_list			*ft_lstlast(t_list *lst);
-t_list			*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-t_list			*ft_lstnew(void *content);
 t_list			*ft_build_stack(t_list **a, t_list **b, char *str);
 t_list			*ft_create_node(t_list **a, char *value, int position);
 t_list			*ft_add_node(t_list *e, int e_value, int position);

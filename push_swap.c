@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:29:24 by laroges           #+#    #+#             */
-/*   Updated: 2023/10/11 21:19:56 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/14 16:50:36 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,32 +120,24 @@ int	main(int argc, char **argv)
 {
 	t_list	**a;
 	t_list	**b;
-	int		count;
 
 	a = (t_list **)malloc(sizeof(t_list));
 	b = (t_list **)malloc(sizeof(t_list));
-	count = 0;
 	if (a == NULL || b == NULL)
 		return (-1);
 	*a = NULL;
 	*b = NULL;
-	if (argc < 2)
+	if (argc > 1)
 	{
-		free(a);
-		free(b);
-		return (0);	
+		*a = ft_init_stack_a(argc, argv, a, b);
+		if (!ft_check_list(a))
+		{
+			if (ft_lstsize(*a) > 5)
+				ft_push_bits_zero_to_b(a, b);
+			else
+				ft_sort_small_stack(a, b);
+		}
 	}
-	*a = ft_init_stack_a(argc, argv, a, b);
-	if (!ft_check_list(a))
-	{
-		if (ft_lstsize(*a) > 5) // Finaliser ft_sort_small_stack
-			count += ft_push_bits_zero_to_b(a, b);
-		else
-			count += ft_sort_small_stack(a, b);
-	}
-/*	printf("Nombre de coups = %d\n", count);
-	if (ft_check_list(a))
-		printf("La liste est triee.\n");
-*/	ft_free(a, b);
+	ft_free(a, b);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 21:07:27 by laroges           #+#    #+#             */
-/*   Updated: 2023/10/11 20:35:37 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/14 15:10:06 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,18 @@ int	ft_check_list(t_list **lst)
 
 // Liste inferieure ou egale a 5 nombres 
 
-int	ft_sort_small_stack(t_list **a, t_list **b)
+void	ft_sort_small_stack(t_list **a, t_list **b)
 {
-	int		count;
-
-	count = 0;
 	if (a == NULL || *a == NULL)
-		return (-1);
-	if (ft_lstsize(*a) == 1)
-		count = 0;
-	else if (ft_lstsize(*a) == 2)
-		count = ft_stack_sized_two(a);
+		return ;
+	if (ft_lstsize(*a) == 2)
+		ft_stack_sized_two(a);
 	else if (ft_lstsize(*a) == 3)
-		count = ft_stack_sized_three(a);
+		ft_stack_sized_three(a);
 	else if (ft_lstsize(*a) == 4)
-		count = ft_stack_sized_four(a, b);
+		ft_stack_sized_four(a, b);
 	else
-		count = ft_stack_sized_five(a, b);
-	return (count);
+		ft_stack_sized_five(a, b);
 }
 
 void	ft_fill_index(t_list **a)
@@ -96,7 +90,7 @@ t_list	*ft_smallest_value(t_list **lst)
 		return (NULL);
 	smallest = t_small->value;
 	t_small->smallest_value_indicator = 1;
-	t_small = ft_loop_find_smallest_value(lst, t_small, smallest);
+	t_small = ft_find_smallest_value(lst, t_small, smallest);
 	return (t_small);
 }
 

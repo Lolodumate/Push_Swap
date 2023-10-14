@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:41:53 by laroges           #+#    #+#             */
-/*   Updated: 2023/10/10 21:03:39 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/14 14:45:38 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ void	ft_exit(t_list **a, t_list **b)
 
 void	ft_free(t_list **a, t_list **b)
 {
-	ft_free_stack(*a);
-	ft_free_stack(*b);
+	if (*a)
+		ft_free_stack(*a);
+	if (*b)
+		ft_free_stack(*b);
 	free(a);
 	free(b);
 }
