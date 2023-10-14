@@ -6,19 +6,19 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 21:36:20 by laroges           #+#    #+#             */
-/*   Updated: 2023/10/14 15:42:27 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/14 18:42:19 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_stack_sized_two(t_list **a)
+void	ft_stack_sized_two(t_list_ps **a)
 {
 	if ((*a)->value > (*a)->next->value)
 		sa(a);
 }
 
-void	ft_stack_sized_three(t_list **a)
+void	ft_stack_sized_three(t_list_ps **a)
 {
 	if ((*a)->index == 1)
 	{
@@ -43,9 +43,9 @@ void	ft_stack_sized_three(t_list **a)
 // 1. Find the greatest index et send it in the stack B.
 // 2. Run of the fonction to sort three nodes.
 // 3. Send back the greatest index in the stack A and place it in the bottom.
-void	ft_stack_sized_four(t_list **a, t_list **b)
+void	ft_stack_sized_four(t_list_ps **a, t_list_ps **b)
 {
-	t_list	*tmp;
+	t_list_ps	*tmp;
 
 	tmp = ft_smallest_value_indicator(a);
 	if (tmp->position == 1)
@@ -64,9 +64,9 @@ void	ft_stack_sized_four(t_list **a, t_list **b)
 	pa(a, b);
 }
 
-void	ft_stack_sized_five(t_list **a, t_list **b)
+void	ft_stack_sized_five(t_list_ps **a, t_list_ps **b)
 {
-	t_list	*tmp;
+	t_list_ps	*tmp;
 
 	if (*a == NULL)
 		return ;

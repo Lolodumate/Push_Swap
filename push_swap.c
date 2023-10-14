@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:29:24 by laroges           #+#    #+#             */
-/*   Updated: 2023/10/14 16:50:36 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/14 19:45:40 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	*ft_create_strjoin(char **argv, int len)
 	return (str);
 }
 
-t_list	*ft_build_stack(t_list **a, t_list **b, char *str)
+t_list_ps	*ft_build_stack(t_list_ps **a, t_list_ps **b, char *str)
 {
 	int			position;
 	int			i;
@@ -113,31 +113,4 @@ char	*ft_build_str(int argc, char **argv)
 	else
 		str = NULL;
 	return (str);
-}
-
-// Test : make m && valgrind ./push_swap 5 3 4 6 7 8 1 2 9 0-0000000 10
-int	main(int argc, char **argv)
-{
-	t_list	**a;
-	t_list	**b;
-
-	a = (t_list **)malloc(sizeof(t_list));
-	b = (t_list **)malloc(sizeof(t_list));
-	if (a == NULL || b == NULL)
-		return (-1);
-	*a = NULL;
-	*b = NULL;
-	if (argc > 1)
-	{
-		*a = ft_init_stack_a(argc, argv, a, b);
-		if (!ft_check_list(a))
-		{
-			if (ft_lstsize(*a) > 5)
-				ft_push_bits_zero_to_b(a, b);
-			else
-				ft_sort_small_stack(a, b);
-		}
-	}
-	ft_free(a, b);
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:31:58 by laroges           #+#    #+#             */
-/*   Updated: 2023/10/10 19:30:25 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/14 19:47:50 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_argv_compliant(char **argv)
 	len = 0;
 	while (argv[j])
 	{
-		while (ft_isdigit(argv[j][i]) || argv[j][i] == ' ')
+		while (ft_isdigit_or_issign(argv[j][i]) || argv[j][i] == ' ')
 		{
 			if (argv[j][i] == '-' || argv[j][i] == '+')
 				if (!argv[j][i + 1] || argv[j][i + 1] == '-' ||

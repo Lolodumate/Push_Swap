@@ -6,17 +6,17 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:43:01 by laroges           #+#    #+#             */
-/*   Updated: 2023/09/25 18:14:59 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/14 18:41:16 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ra(t_list **a)
+void	ra(t_list_ps **a)
 {
-	t_list		*top;
-	t_list		*tmp;
-	t_list		*new_top;
+	t_list_ps		*top;
+	t_list_ps		*tmp;
+	t_list_ps		*new_top;
 
 	top = *a;
 	tmp = *a;
@@ -41,11 +41,11 @@ void	ra(t_list **a)
 	}
 }
 
-void	rb(t_list **b)
+void	rb(t_list_ps **b)
 {
-	t_list		*top;
-	t_list		*tmp;
-	t_list		*new_top;
+	t_list_ps		*top;
+	t_list_ps		*tmp;
+	t_list_ps		*new_top;
 
 	top = *b;
 	tmp = *b;
@@ -70,7 +70,7 @@ void	rb(t_list **b)
 	}
 }
 
-void	rr(t_list **a, t_list **b)
+void	rr(t_list_ps **a, t_list_ps **b)
 {
 	ra(a);
 	rb(b);

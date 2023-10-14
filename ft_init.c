@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 18:13:52 by laroges           #+#    #+#             */
-/*   Updated: 2023/10/10 20:30:13 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/14 18:38:45 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	ft_len_number(char *str, int i)
 	len = 0;
 	if (!str)
 		return (0);
-	while (str[i] && !ft_isdigit(str[i]))
+	while (str[i] && !ft_isdigit_or_issign(str[i]))
 		i--;
-	while (i >= 0 && str[i] && ft_isdigit(str[i]))
+	while (i >= 0 && str[i] && ft_isdigit_or_issign(str[i]))
 	{
 		len++;
 		i--;
@@ -45,13 +45,13 @@ char	*ft_fill_value(char *str, char *value, int i, int len)
 	return (value);
 }
 
-t_list	*ft_create_node(t_list **a, char *value, int position)
+t_list_ps	*ft_create_node(t_list_ps **a, char *value, int position)
 {
 	if (!a || !value)
 		return (NULL);
-	if (!ft_limits(ft_atoi(value)))
+	if (!ft_limits(ft_atoi_long(value)))
 		return (NULL);
-	*a = ft_add_node(*a, (int)ft_atoi(value), position);
+	*a = ft_add_node(*a, (int)ft_atoi_long(value), position);
 	(*a)->name_stack = 'A';
 	free(value);
 	return (*a);
@@ -65,9 +65,9 @@ int	ft_limits(long value)
 	return (1);
 }
 
-t_list	*ft_duplicate(t_list **a)
+t_list_ps	*ft_duplicate(t_list_ps **a)
 {
-	t_list	*tmp;
+	t_list_ps	*tmp;
 
 	tmp = *a;
 	if (*a == NULL)

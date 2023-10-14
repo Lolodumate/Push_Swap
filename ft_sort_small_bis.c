@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 15:40:56 by laroges           #+#    #+#             */
-/*   Updated: 2023/10/14 15:50:33 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/14 22:16:42 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 // Sub fonction for ft_smallest_value
 // Browse the list until it finds an index == 0
-t_list	*ft_loop_smallest_ptr(t_list **lst)
+t_list_ps	*ft_loop_smallest_ptr(t_list_ps **lst)
 {
-	t_list	*tmp;
-	t_list	*t_small;
-	int		i;
+	t_list_ps	*tmp;
+	t_list_ps	*t_small;
+	int			i;
 
 	tmp = *lst;
 	t_small = *lst;
@@ -43,9 +43,9 @@ t_list	*ft_loop_smallest_ptr(t_list **lst)
 
 // Sub fonction for ft_smallest_value
 // Browse the whole list to find the smallest value with index == 0
-t_list	*ft_find_smallest_value(t_list **lst, t_list *t_small, int s)
+t_list_ps	*ft_find_smallest_value(t_list_ps **lst, t_list_ps *t_small, int s)
 {
-	t_list	*tmp;
+	t_list_ps	*tmp;
 
 	tmp = *lst;
 	while (tmp)
@@ -64,11 +64,11 @@ t_list	*ft_find_smallest_value(t_list **lst, t_list *t_small, int s)
 	return (t_small);
 }
 
-t_list	*ft_smallest_value_indicator(t_list **a)
+t_list_ps	*ft_smallest_value_indicator(t_list_ps **a)
 {
-	t_list	*tmp;
-	t_list	*smallest_ptr;
-	int		smallest;
+	t_list_ps	*tmp;
+	t_list_ps	*smallest_ptr;
+	int			smallest;
 
 	tmp = *a;
 	smallest_ptr = *a;
@@ -88,10 +88,10 @@ t_list	*ft_smallest_value_indicator(t_list **a)
 	return (smallest_ptr);
 }
 
-void	ft_update_index(t_list **a, t_list **b)
+void	ft_update_index(t_list_ps **a, t_list_ps **b)
 {
-	int		i;
-	t_list	*tmp;
+	int			i;
+	t_list_ps	*tmp;
 
 	i = 1;
 	tmp = *a;

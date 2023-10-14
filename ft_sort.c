@@ -6,17 +6,17 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 21:07:27 by laroges           #+#    #+#             */
-/*   Updated: 2023/10/14 15:10:06 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/14 22:04:14 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_check_list(t_list **lst)
+int	ft_check_list(t_list_ps **lst)
 {
-	t_list	*tmp;
-	int		i;
-	int		n;
+	t_list_ps	*tmp;
+	int			i;
+	int			n;
 
 	tmp = *lst;
 	i = 1;
@@ -35,7 +35,7 @@ int	ft_check_list(t_list **lst)
 
 // Liste inferieure ou egale a 5 nombres 
 
-void	ft_sort_small_stack(t_list **a, t_list **b)
+void	ft_sort_small_stack(t_list_ps **a, t_list_ps **b)
 {
 	if (a == NULL || *a == NULL)
 		return ;
@@ -49,12 +49,12 @@ void	ft_sort_small_stack(t_list **a, t_list **b)
 		ft_stack_sized_five(a, b);
 }
 
-void	ft_fill_index(t_list **a)
+void	ft_fill_index(t_list_ps **a)
 {
-	int		i;
-	int		bits;
-	int		pos;
-	t_list	*tmp;
+	int			i;
+	int			bits;
+	int			pos;
+	t_list_ps	*tmp;
 
 	i = 0;
 	pos = 0;
@@ -75,10 +75,10 @@ void	ft_fill_index(t_list **a)
 	}
 }
 
-t_list	*ft_smallest_value(t_list **lst)
+t_list_ps	*ft_smallest_value(t_list_ps **lst)
 {
-	t_list	*t_small;
-	int		smallest;
+	t_list_ps	*t_small;
+	int			smallest;
 
 	t_small = *lst;
 	smallest = 0;
@@ -94,11 +94,11 @@ t_list	*ft_smallest_value(t_list **lst)
 	return (t_small);
 }
 
-t_list	*ft_greatest_value(t_list **lst)
+t_list_ps	*ft_greatest_value(t_list_ps **lst)
 {
-	t_list	*tmp;
-	t_list	*t_great;
-	int		greatest;
+	t_list_ps	*tmp;
+	t_list_ps	*t_great;
+	int			greatest;
 
 	tmp = *lst;
 	t_great = tmp;

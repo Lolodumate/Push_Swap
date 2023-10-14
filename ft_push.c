@@ -6,18 +6,18 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:10:23 by laroges           #+#    #+#             */
-/*   Updated: 2023/10/10 17:06:14 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/14 22:09:37 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	pa(t_list **a, t_list **b)
+void	pa(t_list_ps **a, t_list_ps **b)
 {
-	int		pos;
-	t_list	*stack_a;
-	t_list	*stack_b;
-	t_list	*tmp_b;
+	int			pos;
+	t_list_ps	*stack_a;
+	t_list_ps	*stack_b;
+	t_list_ps	*tmp_b;
 
 	pos = 1;
 	stack_a = *a;
@@ -36,12 +36,12 @@ void	pa(t_list **a, t_list **b)
 	write(1, "pa\n", 3);
 }
 
-void	pb(t_list **a, t_list **b)
+void	pb(t_list_ps **a, t_list_ps **b)
 {
-	int		pos;
-	t_list	*stack_a;
-	t_list	*stack_b;
-	t_list	*tmp_a;
+	int			pos;
+	t_list_ps	*stack_a;
+	t_list_ps	*stack_b;
+	t_list_ps	*tmp_a;
 
 	pos = 1;
 	stack_a = *a;

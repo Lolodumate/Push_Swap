@@ -6,20 +6,20 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:41:53 by laroges           #+#    #+#             */
-/*   Updated: 2023/10/14 14:45:38 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/14 19:35:41 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_exit(t_list **a, t_list **b)
+void	ft_exit(t_list_ps **a, t_list_ps **b)
 {
 	ft_free(a, b);
 	write(2, "Error\n", 6);
 	exit(1);
 }
 
-void	ft_free(t_list **a, t_list **b)
+void	ft_free(t_list_ps **a, t_list_ps **b)
 {
 	if (*a)
 		ft_free_stack(*a);
@@ -34,7 +34,7 @@ char	*ft_strcpy(char *str1, char *str2, int j)
 	int	i;
 
 	i = 0;
-	while (ft_isdigit(str2[i]))
+	while (ft_isdigit_or_issign(str2[i]))
 	{
 		str1[i] = str2[i + j];
 		i++;
@@ -57,7 +57,7 @@ int	ft_convert_int(char *str, int i)
 	if (s == NULL)
 		return (-1);
 	ft_strcpy(s, str, i);
-	value = ft_atoi(s);
+	value = ft_atoi_long(s);
 	free(s);
 	return (value);
 }
@@ -76,7 +76,7 @@ int	ft_convert_binary(int index)
 		return (-1);
 	res[64] = '\0';
 	res = ft_bits_convert_binary(index, res, bits);
-	bits_int = ft_atoi(res);
+	bits_int = ft_atoi_long(res);
 	free(res);
 	return (bits_int);
 }

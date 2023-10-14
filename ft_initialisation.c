@@ -6,13 +6,13 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 21:12:43 by laroges           #+#    #+#             */
-/*   Updated: 2023/10/10 22:29:47 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/14 22:05:59 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*ft_init_stack_a(int argc, char **argv, t_list **a, t_list **b)
+t_list_ps	*ft_init_stack(int argc, char **argv, t_list_ps **a, t_list_ps **b)
 {
 	char	*str;
 

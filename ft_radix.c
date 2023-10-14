@@ -6,18 +6,18 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:34:41 by laroges           #+#    #+#             */
-/*   Updated: 2023/10/10 20:47:45 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/14 22:11:21 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 // Size of each binary index
-void	ft_len_binary(t_list **a)
+void	ft_len_binary(t_list_ps **a)
 {
-	int		len;
-	int		i;
-	t_list	*tmp;
+	int			len;
+	int			i;
+	t_list_ps	*tmp;
 
 	len = 0;
 	i = 0;
@@ -38,10 +38,10 @@ void	ft_len_binary(t_list **a)
 }
 
 // Send the greatest sized binary (number of figures)
-int	ft_greatest_len_binary(t_list **a)
+int	ft_greatest_len_binary(t_list_ps **a)
 {
-	int		greatest;
-	t_list	*tmp;
+	int			greatest;
+	t_list_ps	*tmp;
 
 	greatest = 0;
 	if (a == NULL)
@@ -59,7 +59,7 @@ int	ft_greatest_len_binary(t_list **a)
 	return (greatest);
 }
 
-int	ft_push_bits_zero_to_b(t_list **a, t_list **b)
+int	ft_push_bits_zero_to_b(t_list_ps **a, t_list_ps **b)
 {
 	int		greatest_binary;
 	int		pos;

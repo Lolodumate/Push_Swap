@@ -6,19 +6,19 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:22:30 by laroges           #+#    #+#             */
-/*   Updated: 2023/10/10 17:03:17 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/14 22:15:29 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sa(t_list **a)
+void	sa(t_list_ps **a)
 {
-	t_list		*top;
-	t_list		*tmp;
-	int			tmp_value;
-	int			tmp_position;
-	int			tmp_index;
+	t_list_ps		*top;
+	t_list_ps		*tmp;
+	int				tmp_value;
+	int				tmp_position;
+	int				tmp_index;
 
 	top = *a;
 	tmp = top->next;
@@ -40,13 +40,13 @@ void	sa(t_list **a)
 	}
 }
 
-void	sb(t_list **b)
+void	sb(t_list_ps **b)
 {
-	t_list	*top;
-	t_list	*tmp;
-	int		tmp_value;
-	int		tmp_position;
-	int		tmp_index;
+	t_list_ps	*top;
+	t_list_ps	*tmp;
+	int			tmp_value;
+	int			tmp_position;
+	int			tmp_index;
 
 	top = *b;
 	tmp = top->next;
@@ -68,17 +68,17 @@ void	sb(t_list **b)
 	}
 }
 
-void	ss(t_list **a, t_list **b)
+void	ss(t_list_ps **a, t_list_ps **b)
 {
 	sa(a);
 	sb(b);
 	write(1, "ss\n", 3);
 }
 
-int	ft_is_greater_than(t_list **lst)
+int	ft_is_greater_than(t_list_ps **lst)
 {
-	int		n;
-	t_list	*tmp;
+	int			n;
+	t_list_ps	*tmp;
 
 	n = 0;
 	if (lst == NULL || *lst == NULL)

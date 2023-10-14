@@ -6,15 +6,15 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:12:47 by laroges           #+#    #+#             */
-/*   Updated: 2023/10/14 15:00:06 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/14 21:30:52 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*ft_add_node(t_list *lst, int e_value, int e_position)
+t_list_ps	*ft_add_node(t_list_ps *lst, int e_value, int e_position)
 {
-	t_list	*new;
+	t_list_ps	*new;
 
 	new = malloc(sizeof(*new));
 	if (new == NULL)
@@ -36,9 +36,9 @@ t_list	*ft_add_node(t_list *lst, int e_value, int e_position)
 	return (new);
 }
 
-t_list	*ft_free_stack(t_list *lst)
+t_list_ps	*ft_free_stack(t_list_ps *lst)
 {
-	t_list	*tmp;
+	t_list_ps	*tmp;
 
 	if (lst == NULL)
 		return (NULL);
@@ -47,9 +47,9 @@ t_list	*ft_free_stack(t_list *lst)
 	return (ft_free_stack(tmp));
 }
 
-t_list	*ft_check_duplicate(int value, t_list *a)
+t_list_ps	*ft_check_duplicate(int value, t_list_ps *a)
 {
-	t_list	*tmp;
+	t_list_ps	*tmp;
 
 	tmp = a->next;
 	if (tmp == NULL)
@@ -57,4 +57,28 @@ t_list	*ft_check_duplicate(int value, t_list *a)
 	if (value == tmp->value)
 		return (tmp);
 	return (ft_check_duplicate(value, tmp));
+}
+
+int	ft_lstsize(t_list_ps *lst)
+{
+	int		size;
+
+	size = 0;
+	if (lst == NULL)
+		return (0);
+	while (lst)
+	{
+		size++;
+		lst = lst->next;
+	}
+	return (size);
+}
+
+t_list_ps	*ft_lstlast(t_list_ps *lst)
+{
+	if (lst == NULL)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }

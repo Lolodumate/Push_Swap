@@ -6,7 +6,7 @@
 /*   By: laroges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:06:10 by laroges           #+#    #+#             */
-/*   Updated: 2023/10/10 17:58:54 by laroges          ###   ########.fr       */
+/*   Updated: 2023/10/14 18:46:11 by laroges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_create_value(char *str, int i, int len)
 }
 
 // Sub fonction for ft_len_binary
-int	ft_loop_len_binary(t_list *lst)
+int	ft_loop_len_binary(t_list_ps *lst)
 {
 	int	len;
 	int	i;
@@ -46,7 +46,7 @@ int	ft_loop_len_binary(t_list *lst)
 }
 
 // Sub fonction for ft_push_bits_zero_to_b
-int	ft_loop_push_to_b(t_list **a, t_list **b, int position)
+int	ft_loop_push_to_b(t_list_ps **a, t_list_ps **b, int position)
 {
 	int	tmp;
 	int	count;
